@@ -1,28 +1,50 @@
-import { createContext, useState } from "react";
-import { IAuthProvider, IContext, IUser} from "./types";
-import { LoginResquest } from "./Util";
+import { createContext, useEffect, useState } from "react";
+import { IAuthProvider, IContext, IUser } from "./types";
+import { LoginResquest, getUserLocalStorage, setUserLocalStorage } from "./Util";
+
+//cria o contexto de autenticação usando a interface IContext
+export const AuthContext = createContext<IContext>({} as IContext);
+
+//cria e retorna o provedor do contexto de autenticação
+export const AuthProvider = ({ children }: IAuthProvider) => {
+
+  //cria o usuario
+  const [user, setUser] = useState<IUser | null>();
+
+  useEffect(() => {
+    const user = getUserLocalStorage()
+
+    if(user) {
+      setUser(user)
+    }
+
+  }, [])
 
 
 
-export const AuthContext = createContext<IContext>({} as IContext)
+  //função que autentica o usuario, recebendo o email e senha
+  async function authenticate(email: string, password: string) {
+    //pega a resposta da requisição de login da API
+    const reponse = await LoginResquest(email, password);
 
-export const AuthProvider = ({children}: IAuthProvider) => {
-  const [user, setUser] = useState<IUser | null>()
+    //guarda a resposta da API com o token e o email
+    const payload = { token: reponse.token, email };
 
-  async function authenticate(email: string, password:string) {
-    const reponse = await LoginResquest(email, password)
+    //armazena em memória o usuario
+    setUser(payload);
+    //armazena no local storage
+    setUserLocalStorage(payload);
+  }
 
-    const payload = {token: reponse.token, email};
-    setUser(payload)
-  } 
-
-  function logout () {
-    setUser(null)
+  //faz o logout da conta
+  function logout() {
+    setUser(null);
+    setUserLocalStorage(null);
   }
 
   return (
-    <AuthContext.Provider value={{...user, authenticate, logout}}>
+    <AuthContext.Provider value={{ ...user, authenticate, logout }}>
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
