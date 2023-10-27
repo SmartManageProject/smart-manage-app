@@ -1,7 +1,7 @@
 //cria a base do usuario com o email e token de autenticação
 export interface IUser {
   email?: string;
-  toke?: string;
+  token?: string;
 }
 
 // cria a base do contexto com a interface de usuario mais a função de autenticação e logout
