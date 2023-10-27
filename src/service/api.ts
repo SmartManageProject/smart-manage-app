@@ -4,7 +4,7 @@ import { getUserLocalStorage } from "../Context/AuthProvider/Util";
 
 //cria a url base para fazer as requests no back-end
 export const Api = axios.create({
-  baseURL: ""
+  baseURL: "http://localhost:3000"
 })
 
 Api.interceptors.request.use(

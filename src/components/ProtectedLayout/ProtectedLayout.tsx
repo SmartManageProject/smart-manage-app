@@ -1,16 +1,16 @@
+import { redirect } from "react-router-dom";
 import { useAuth } from "../../Context/AuthProvider/useAuth";
-import Login from "../../pages/Login/Login";
-import { Route } from "react-router-dom";
+import { ReactNode } from "react";
 
 type ProtectedLayoutProps = {
-  children: JSX.Element;
+  children: JSX.Element | ReactNode;
 };
 
 const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
   const auth = useAuth();
 
   if (!auth.token) {
-    return <Route path="/login" element={<Login />} />;
+    return redirect("/login");
   }
 
   return children;
