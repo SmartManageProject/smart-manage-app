@@ -1,14 +1,15 @@
+import styles from "./Button.module.scss";
 
-type buttonProps= {
-  children: React.ReactNode
-  type?: "button" | "submit" | "reset" | undefined
-}
+type buttonProps = {
+  children: React.ReactNode;
+  type?: "button" | "submit" | "reset" | undefined;
+};
 
+const Button = ({ children }: buttonProps) => {
+  if (children === 'Cadastre-se') {
+    return <button className={styles.buttonCadastre}>{children}</button>;
+  }
+  return <button className={styles.button}>{children}</button>;
+};
 
-const Button = ({children}: buttonProps) => {
-  return (
-    <button>{children}</button>
-  )
-}
-
-export default Button
+export default Button;
