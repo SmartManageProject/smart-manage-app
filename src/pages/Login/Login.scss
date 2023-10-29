@@ -1,0 +1,12 @@
+.containerlogin{
+  display: grid;
+  grid-column: 60vh auto;
+  grid-template-areas: "banner forms";
+
+  .forms {
+    grid-area: forms;
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 1rem;
+  }
+}

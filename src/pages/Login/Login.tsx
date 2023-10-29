@@ -1,11 +1,18 @@
-import React from 'react'
+import "./Login.scss";
+import Banner from "../../components/Banner/Banner";
+import Logo from "../../components/Logo/Logo";
 
 // type Props = {}
 
 const Login = () => {
   return (
-    <div>Login</div>
-  )
-}
+    <div className="containerlogin">
+      <Banner />
+      <div className="forms">
+        <Logo />
+      </div>
+    </div>
+  );
+};
 
-export default Login
+export default Login;
