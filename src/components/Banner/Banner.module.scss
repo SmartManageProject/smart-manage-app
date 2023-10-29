@@ -1,8 +1,7 @@
 .banner {
   grid-area: banner;
-  width: 135vh;
+  width: auto;
   height: 100vh;
-  flex-shrink: 0;
   border-radius: 0px 25px 25px 0px;
   background: url(/bannerLogin.png), lightgray 50% / cover no-repeat;
 }

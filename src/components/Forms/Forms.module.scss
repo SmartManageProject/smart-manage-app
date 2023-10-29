@@ -1,3 +1,13 @@
 .inputsContainer{
-  
+  grid-area: forms;
+  display: flex;
+  flex-direction: column;
+  margin: 6rem 0.7rem;
+  align-items: center;
+  .input{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 0;
+  }
 }

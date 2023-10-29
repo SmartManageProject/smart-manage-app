@@ -1,15 +1,17 @@
+import Logo from '../Logo/Logo'
 import styles from './Forms.module.scss'
 
 const Forms = () => {
   return (
     <form className={styles.inputsContainer}>
-      <div>
-        <label htmlFor="">Email:</label>
-        <input type="text" />
+      <Logo/>
+      <div className={styles.input}>
+        <label htmlFor="email">Email:</label>
+        <input type="text" name='email' id='email' required/>
       </div>
-      <div>
-        <label htmlFor="">Senha:</label>
-        <input type="text" />
+      <div className={styles.input}>
+        <label htmlFor="senha">Senha:</label>
+        <input type="text" name='senha' id='senha' required/>
       </div>
     </form>
   )

@@ -1,16 +1,12 @@
 import "./Login.scss";
 import Banner from "../../components/Banner/Banner";
-import Logo from "../../components/Logo/Logo";
-
-// type Props = {}
+import Forms from "../../components/Forms/Forms";
 
 const Login = () => {
   return (
     <div className="containerlogin">
-      <Banner />
-      <div className="forms">
-        <Logo />
-      </div>
+        <Banner />
+        <Forms />
     </div>
   );
 };
