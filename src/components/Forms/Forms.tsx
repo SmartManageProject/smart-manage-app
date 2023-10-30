@@ -12,8 +12,8 @@ const Forms = () => {
           <input type="text" name="email" id="email" required />
         </div>
         <div className={styles.input}>
-          <label htmlFor="senha">Senha:</label>
-          <input type="text" name="senha" id="senha" required />
+          <label htmlFor="password">Senha:</label>
+          <input type="password" name="password" id="password" required />
         </div>
         <div className={styles.buttons}>
           <Button>Login</Button>
