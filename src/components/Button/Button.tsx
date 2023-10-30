@@ -2,7 +2,7 @@ import styles from "./Button.module.scss";
 
 type buttonProps = {
   children: React.ReactNode;
-  type?: "button" | "submit" | "reset" | undefined;
+  type?: "submit" | undefined;
 };
 
 const Button = ({ children }: buttonProps) => {

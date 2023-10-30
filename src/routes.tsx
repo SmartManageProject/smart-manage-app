@@ -1,10 +1,20 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import CreateProject from "./pages/CreateProject/CreateProject";
 import { AuthProvider } from "./Context/AuthProvider/AuthProvider";
-import ProtectedLayout from "./components/ProtectedLayout/ProtectedLayout";
 import Login from "./pages/Login/Login";
+import { useAuth } from "./Context/AuthProvider/useAuth";
+
+const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
+  const auth = useAuth();
+
+  if (!auth.token) {
+    return <Navigate to="/login" />;
+  }
+
+  return element;
+};
 
 const AppRoutes = () => {
   return (
@@ -12,12 +22,19 @@ const AppRoutes = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <ProtectedLayout>
-            <Route path="/">
-              <Route index path="/home" element={<HomePage />} />
-              <Route path="/CreateProject" element={<CreateProject />} />
-            </Route>
-          </ProtectedLayout>
+          <Route path="/">
+            <Route
+              index
+              path="/home"
+              element={<ProtectedRoute element={<HomePage />}></ProtectedRoute>}
+            />
+            <Route
+              path="/CreateProject"
+              element={
+                <ProtectedRoute element={<CreateProject />}></ProtectedRoute>
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
