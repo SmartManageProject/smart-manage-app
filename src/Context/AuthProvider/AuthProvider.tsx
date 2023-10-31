@@ -23,6 +23,8 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       const payload = {id: response.id, token: response.token};
       setUser(payload);
       setUserLocalStorage(payload);
+    } else {
+      throw new Error('Usuário não autenticado');
     }
 
   }
