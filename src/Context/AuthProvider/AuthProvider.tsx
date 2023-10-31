@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
   }, [])
 
-  async function authenticate(email: string, password: string) {
+  async function authenticate(email: string | null | undefined, password: string | null | undefined) {
     const response = await LoginResquest(email, password);
     if(response.token !== undefined){
       const payload = {id: response.id, token: response.token};
