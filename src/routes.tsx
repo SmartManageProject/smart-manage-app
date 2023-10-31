@@ -13,7 +13,6 @@ const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   if (!auth.token && !getUserLocalStorage()) {
     return <Navigate to="/login" />;
   }
-
   return element;
 };
 
