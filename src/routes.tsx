@@ -25,7 +25,6 @@ const AppRoutes = () => {
           <Route path="/">
             <Route
               index
-              path="/home"
               element={<ProtectedRoute element={<HomePage />}></ProtectedRoute>}
             />
             <Route

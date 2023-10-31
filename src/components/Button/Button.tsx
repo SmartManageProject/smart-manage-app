@@ -5,9 +5,9 @@ type buttonProps = {
   type?: "submit" | undefined;
 };
 
-const Button = ({ children }: buttonProps) => {
+const Button = ({ children, type }: buttonProps) => {
   if (children === 'Cadastre-se') {
-    return <button className={styles.buttonCadastre}>{children}</button>;
+    return <button type={type} className={styles.buttonCadastre}>{children}</button>;
   }
   return <button className={styles.button}>{children}</button>;
 };
