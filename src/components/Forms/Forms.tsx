@@ -3,7 +3,8 @@ import { useAuth } from "../../Context/AuthProvider/useAuth";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
 import styles from "./Forms.module.scss";
-import { FormEvent, useRef} from "react";
+import { FormEvent, useRef, useState} from "react";
+import ModalCreateUser from "../ModalCreateUser/ModalCreateUser";
 
 const Forms = () => {
   const auth = useAuth();
@@ -20,10 +21,10 @@ const Forms = () => {
     }
   }
 
-  // const [email, setEmail] = useState("")
-  // const [password, setPassword] = useState("")
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
+
+  const [openModule, setOpenModule] = useState<boolean>(false)
 
   return (
     <div className={styles.formsContainer}>
@@ -39,9 +40,10 @@ const Forms = () => {
         </div>
         <div className={styles.buttons}>
           <Button type="submit" >Login</Button>
-          <Button>Cadastre-se</Button>
+          <Button openModule={setOpenModule(!openModule)}>Cadastre-se</Button>
         </div>
       </form>
+      <ModalCreateUser showModule={openModule}/>
     </div>
   );
 };
