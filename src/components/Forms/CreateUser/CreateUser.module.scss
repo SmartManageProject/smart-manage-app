@@ -1,0 +1,37 @@
+.inputsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    label {
+      color: #000;
+      font-family: Montserrat;
+      font-size: 1.5rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+    input {
+      border-radius: 1.5rem;
+      border: none;
+      height: 3rem;
+      background: rgba(49, 172, 178, 0.25);
+      padding: 0 1.2rem;
+      font-family: Montserrat;
+      font-size: 1.2rem;
+      color: #000;
+    }
+  }
+  .buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+}
