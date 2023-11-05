@@ -52,11 +52,11 @@ const CreateUser = ({ changeForm }: createUserProps) => {
         </div>
         <div>
           <select name="role" id="role">
-            <option value="frontend">frontend</option>
-            <option value="backend">backend</option>
-            <option value="fullstack">fullstack</option>
-            <option value="manager">manager</option>
-            <option value="productOwner">productOwner</option>
+            <option value="frontend">Front-End</option>
+            <option value="backend">Back-End</option>
+            <option value="fullstack">Full-Stack</option>
+            <option value="manager">Manager</option>
+            <option value="productOwner">Product Owner</option>
           </select>
         </div>
         <div className={styles.buttons}>
