@@ -1,12 +1,8 @@
 .formsContainer{
   grid-area: forms;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
-  gap: 2rem;
+  height: 100vh;
   padding: 0 5rem;
-
-  
 }

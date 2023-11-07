@@ -50,8 +50,9 @@ const CreateUser = ({ changeForm }: createUserProps) => {
             required
           />
         </div>
-        <div>
-          <select name="role" id="role">
+        <div className={styles.input}>
+          <label htmlFor="password">Role:</label>
+          <select className={styles.selectRole} name="role" id="role">
             <option value="frontend">Front-End</option>
             <option value="backend">Back-End</option>
             <option value="fullstack">Full-Stack</option>
