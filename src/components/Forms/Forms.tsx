@@ -20,8 +20,6 @@ const Forms = () => {
     }
   }
 
-  // const [email, setEmail] = useState("")
-  // const [password, setPassword] = useState("")
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
