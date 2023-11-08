@@ -14,9 +14,26 @@ export function getUserLocalStorage() {
   return user ?? null;
 }
 
-export async function LoginResquest(email: string | null | undefined, password: string | null | undefined) {
+export async function LoginResquest(
+  email: string | null | undefined,
+  password: string | null | undefined
+) {
   try {
     const request = await Api.post("authenticate", { email, password });
+    return request.data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function CreateUser(
+  name: string | null | undefined,
+  email: string | null | undefined,
+  password: string | null | undefined,
+  role: string | null | undefined
+) {
+  try {
+    const request = await Api.post("users", { name, email, password, role });
     return request.data;
   } catch (error) {
     return error;

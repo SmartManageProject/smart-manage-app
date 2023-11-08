@@ -1,9 +1,11 @@
 // type Props = {}
 
+import Header from "../../components/Header/Header";
+
 const HomePage = () => {
   return (
     <>
-      <h1>Entrei</h1>
+      <Header/>
     </>
   );
 };
