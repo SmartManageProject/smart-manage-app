@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext,  useState } from "react";
 import { IUserLogged, IUserLoggedContext, IUserLoggedProvider } from "./types";
 import { getUserData } from "./Util";
 import { getUserLocalStorage } from "../AuthProvider/Util";
@@ -12,16 +12,24 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
 
   const user = getUserLocalStorage();
 
-  useEffect(() => {
-    const userLogged = getUserData(user);
-
+  async () => {
+    const userLogged = await getUserData(user);
     if (userLogged) {
       setUserLogget(userLogged);
     }
-  }, []);
+  };
+
+  function getName() {
+    return userLogged?.name 
+  }  
+  function getRole() {
+    return userLogged?.role
+  }
+
+
 
   return (
-    <UserContext.Provider value={{ ...userLogged }}>
+    <UserContext.Provider value={{...userLogged, getName, getRole}}>
       {children}
     </UserContext.Provider>
   );
