@@ -1,13 +1,12 @@
 import { Api } from "../../service/api";
 
 type getUserDataProps = {
-  user: {id: string, token: string};
+  userId: string, 
 }
 
-export async function getUserData({user}: getUserDataProps) {
-
+export async function getUserData({userId}: getUserDataProps) {
   try {
-    const request =  await Api.get(`users/${user.id}`)
+    const request =  await Api.get(`users/${userId}`)
     return request.data
   } catch (error) {
     return error
