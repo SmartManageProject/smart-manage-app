@@ -24,6 +24,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
       });
     };
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   async function getName() {
     return userLogged?.name;
