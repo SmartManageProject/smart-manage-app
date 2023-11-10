@@ -1,4 +1,4 @@
-import './CreateProjectButton.module.scss'
+import styles from  './CreateProjectButton.module.scss'
 
 type buttonProps = {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ type buttonProps = {
 
 const CreateProjectButton = ({children, change}: buttonProps) => {
   return (
-    <button onClick={change}>{children}</button>
+    <button className={styles.buttonCreateProject} onClick={change}>{children}</button>
   )
 }
 
