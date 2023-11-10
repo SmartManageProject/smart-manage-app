@@ -24,11 +24,11 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
       });
     };
     fetchData();
-  }, []);
-  function getName() {
+  }, [user.id]);
+  async function getName() {
     return userLogged?.name;
   }
-  function getRole() {
+  async function getRole() {
     return userLogged?.role;
   }
   async function getProjectsData(): Promise<Project[] | undefined > {

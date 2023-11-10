@@ -9,13 +9,14 @@ const ProjectSideBar = () => {
   const response = useUserLogged()
   const [projectsList, setProjectsList] = useState<Project[] | undefined>(undefined);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function suaFuncaoAsync() {
     const projectsList = await response.getProjectsData()
     setProjectsList(projectsList)
   }
   useEffect(() => {
     suaFuncaoAsync();
-  }, []); 
+  }, [suaFuncaoAsync]); 
 
   return (
     <div className={styles.container}>
