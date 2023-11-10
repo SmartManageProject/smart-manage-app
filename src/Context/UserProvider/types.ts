@@ -6,8 +6,13 @@ export interface IUserLogged {
 export interface IUserLoggedContext extends IUserLogged {
   getName: () => string | undefined;
   getRole: () => string | undefined;
+  getProjectsData: () => Promise<Project[]| undefined >
 }
 
-export interface IUserLoggedProvider{
+export interface IUserLoggedProvider {
   children: JSX.Element;
+}
+
+export interface Project { 
+  id: string; name: string; description: string 
 }

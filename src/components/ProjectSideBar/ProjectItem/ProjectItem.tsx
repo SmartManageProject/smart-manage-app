@@ -1,8 +1,13 @@
 
+type projectItemProps = {
+  name: string;
+  description: string;
+}
 
-const ProjectItem = () => {
+const ProjectItem = ({name}: projectItemProps) => {
+  console.log(name)
   return (
-    <div>ProjectItem</div>
+    <div>{name}</div>
   )
 }
 
