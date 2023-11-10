@@ -4,9 +4,11 @@ import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 import ProjectItem from "./ProjectItem/ProjectItem";
 import styles from "./ProjectSideBar.module.scss";
 import CreateProjectButton from "./CreateProjectButton/CreateProjectButton";
+import { useNavigate } from "react-router-dom";
 
 const ProjectSideBar = () => {
   const response = useUserLogged();
+  const navigate = useNavigate();
   const [projectsList, setProjectsList] = useState<Project[] | undefined>(
     undefined
   );
@@ -18,7 +20,11 @@ const ProjectSideBar = () => {
   }
   useEffect(() => {
     suaFuncaoAsync();
-  }, [suaFuncaoAsync]);
+  }, []);
+
+  function redirectToCreateProject() {
+    navigate("/CreateProject");
+  }
 
   return (
     <div className={styles.container}>
@@ -32,7 +38,9 @@ const ProjectSideBar = () => {
         ))}
       </section>
 
-      <CreateProjectButton />
+      <CreateProjectButton change={redirectToCreateProject}>
+        Criar Projeto
+      </CreateProjectButton>
     </div>
   );
 };
