@@ -1,3 +1,5 @@
+import styles from './ProjectItem.module.scss'
+import logo from '../../../assets/projectImage.png'
 
 type projectItemProps = {
   name: string;
@@ -5,9 +7,12 @@ type projectItemProps = {
 }
 
 const ProjectItem = ({name}: projectItemProps) => {
-  console.log(name)
   return (
-    <div>{name}</div>
+    <div className={styles.projectContainer}>
+      <img src={logo} alt="imagem do projeto" />
+      <p>{name}</p>
+    </div>
+
   )
 }
 

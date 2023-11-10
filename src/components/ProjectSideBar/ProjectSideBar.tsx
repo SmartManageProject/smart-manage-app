@@ -17,8 +17,6 @@ const ProjectSideBar = () => {
     suaFuncaoAsync();
   }, []); 
 
-  console.log(projectsList)
-
   return (
     <div className={styles.container}>
       {projectsList?.map((project) => (
