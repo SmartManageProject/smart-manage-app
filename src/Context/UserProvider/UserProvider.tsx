@@ -24,7 +24,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
       });
     };
     fetchData();
-  }, [user.id]);
+  }, []);
   async function getName() {
     return userLogged?.name;
   }
