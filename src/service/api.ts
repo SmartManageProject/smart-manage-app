@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getUserLocalStorage } from "../Context/AuthProvider/Util";
 
-
 export const Api = axios.create({
   baseURL: "http://localhost:3000/"
 })
@@ -9,9 +8,7 @@ export const Api = axios.create({
 Api.interceptors.request.use(
   (config) => {
     const user = getUserLocalStorage()
-
     config.headers.Authorization = `Bearer ${user?.token}` 
-
     return config;
   },
   (error) => {

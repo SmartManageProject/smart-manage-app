@@ -45,7 +45,9 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     password: string | null | undefined,
     role: string | null | undefined
   ) {
-    const response = await CreateUser(name, email, password, role).then(({response})=> response.data);
+    const response = await CreateUser(name, email, password, role).then(
+      ({ response }) => response.data
+    );
     if (response.status === 400) {
       throw new Error(response.message);
     }
