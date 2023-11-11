@@ -5,7 +5,7 @@ import { AuthProvider } from "./Context/AuthProvider/AuthProvider";
 import Login from "./pages/Login/Login";
 import { useAuth } from "./Context/AuthProvider/useAuth";
 import { getUserLocalStorage } from "./Context/AuthProvider/Util";
-import { UserPorvider } from "./Context/GetUser/UserProvider";
+import { UserPorvider } from "./Context/UserProvider/UserProvider";
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const auth = useAuth();

@@ -1,11 +1,17 @@
-import { useUserLogged } from "../../Context/GetUser/useGetUser"
+import { useState } from "react";
+import { useUserLogged } from "../../Context/UserProvider/useGetUser"
 import styles from './Header.module.scss'
 
 const Header = () => {
   
   const user = useUserLogged();
-  const userName = user.getName();
-  const userRole = user.getRole();
+  const [userName, setUserName] = useState<string | undefined>('')
+  const [userRole, setUserRole] = useState<string | undefined>('')
+  async function setData() {
+    setUserName(await user.getName())
+    setUserRole(await user.getRole())
+  }
+  setData()
 
   return (
     <header className={styles['header-container']}>
@@ -17,7 +23,6 @@ const Header = () => {
         </div>
         <img src="./userIcon.png" alt="Icone de usuário"/>
       </div>
-
     </header>
   )
 }

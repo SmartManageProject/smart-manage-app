@@ -1,10 +1,13 @@
-import React from 'react'
+import styles from "./CreateProject.module.scss"
+import Header from '../../components/Header/Header'
 
 // type Props = {}
 
 const CreateProject = () => {
   return (
-    <div>CreateProject</div>
+    <div className={styles.container}>
+      <Header/>
+    </div>
   )
 }
 
