@@ -1,8 +1,8 @@
-.container {
+.container_project {
   height: 100vh;
   width:auto;
   display: grid;
-  grid-template-columns: 3fr 9fr;
+  grid-template-columns: 9fr 3fr ;
   grid-template-rows: 1.2fr 10.8fr;
   gap: 0px 0px;
   grid-auto-flow: row;
@@ -11,14 +11,14 @@
     "forms sideLayout ";
 }
 
-.header {
+.header_project {
   grid-area: header;
 }
 
-.sideLayout {
+.sideLayout_project {
   grid-area: sideLayout;
 }
 
-.forms {
+.forms_project {
   grid-area: forms;
 }

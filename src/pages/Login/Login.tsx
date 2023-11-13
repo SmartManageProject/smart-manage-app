@@ -1,6 +1,6 @@
 import "./Login.scss";
 import Banner from "../../components/Banner/Banner";
-import Forms from "../../components/Forms/Forms";
+import Forms from "../../components/FormsLogin/Forms";
 
 const Login = () => {
   return (
