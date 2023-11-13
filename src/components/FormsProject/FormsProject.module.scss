@@ -4,7 +4,7 @@
   flex-direction: row;
   margin: 1rem 0 0 1rem;
   .backToHome {
-    color: #000;
+    color: rgb(0, 106, 116);
     font-family: Montserrat;
     font-size: 1.5rem;
     cursor: pointer;
@@ -16,7 +16,7 @@
   }
   .projectForms {
     width: 60%;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +36,7 @@
         font-weight: 400;
       }
       input {
-        border-radius: 1.5rem;
+        border-radius: 1rem;
         border: none;
         height: 3rem;
         background: rgba(49, 172, 178, 0.25);

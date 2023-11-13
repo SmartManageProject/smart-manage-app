@@ -12,7 +12,7 @@ const FormsProject = () => {
 
   return (
     <div className={styles.createProjectForms_container}>
-      <p onClick={redirectToCreateProject} className={styles.backToHome}>Votar</p>
+      <p onClick={redirectToCreateProject} className={styles.backToHome}>Voltar</p>
       <img className={styles.imgProject} src={model} alt="imagem do projeto" />
       <form action="" className={styles.projectForms}>
         <div className={styles.input}>
