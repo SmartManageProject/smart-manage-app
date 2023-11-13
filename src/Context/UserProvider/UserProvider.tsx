@@ -4,6 +4,7 @@ import {
   IUserLoggedContext,
   IUserLoggedProvider,
   Project,
+  User,
 } from "./types";
 import { getProjects, getUserData } from "./Util";
 import { getUserLocalStorage } from "../AuthProvider/Util";
@@ -36,9 +37,14 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
     const projects = await getProjects();
     return projects;
   }
+  async function getUsers(): Promise<User[] | undefined>  {
+    const users = await getUsers();
+    return users
+  }
+
   return (
     <UserContext.Provider
-      value={{ ...userLogged, getName, getRole, getProjectsData }}
+      value={{ ...userLogged, getName, getRole, getProjectsData, getUsers }}
     >
       {children}
     </UserContext.Provider>
