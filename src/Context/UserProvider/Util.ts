@@ -25,17 +25,24 @@ export async function getProjects(): Promise<Project[] | undefined>  {
 }
 
 type getUserProps = {
-  page?: number,
-  limit?: number
+  page: number,
+  limit: number,
+  search?: string | null
 }
 
-export async function getusers({page, limit}:getUserProps): Promise<IUser[] | undefined> {
-  if(limit && page){
+export async function getusers({page, limit, search}:getUserProps): Promise<IUser[] | undefined> {
+  if(search){
     try {
-      const request = await Api.get(`users?page=${page}&limit=${limit}`)
+      const request = await Api.get(`users?search=${search}&limit=${limit}`)
       return request.data
     } catch (error) {
       console.error('Erro ao buscar usuários', error);
     }
+  }
+  try {
+    const request = await Api.get(`users?page=${page}&limit=${limit}`)
+    return request.data
+  } catch (error) {
+    console.error('Erro ao buscar usuários', error);
   }
 }
