@@ -2,18 +2,33 @@ import styles from "./CreateProject.module.scss";
 import Header from "../../components/Header/Header";
 import FormsProject from "../../components/FormsProject/FormsProject";
 import ListUsers from "../../components/ListUsers/ListUsers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 import { useNavigate } from "react-router-dom";
 
-// type Props = {}
-
 const CreateProject = () => {
+  const [listOfUsers, setListOfUsers] = useState<string[]>([]);
   const response = useUserLogged();
   const navigate = useNavigate();
   const [nameProject, setNameProjet] = useState("");
   const [descriptionProject, setDescriptionProjet] = useState("");
-  const [listOfUsers, setListOfUsers] = useState<string[]>([]);
+
+
+  const addOrRemoveUser = (id: string) => {
+    if(listOfUsers.includes(id)){
+      setListOfUsers(["funcionou o remover"])
+      // setListOfUsers(listOfUsers.filter((item) => item != id))
+      console.log("remove")
+      return
+    } 
+    setListOfUsers(["funcionou o adiconar"])
+    // setListOfUsers((prev) => [...prev, id])
+    console.log("add")
+  }
+
+  useEffect(() => (
+    console.log(listOfUsers)
+  ), [listOfUsers])
 
   type createProjectProps = {
     name: string;
@@ -21,16 +36,16 @@ const CreateProject = () => {
     membersId: string[];
   };
 
-  async function createProject({
+  const createProject = async ({
     name,
     description,
     membersId,
-  }: createProjectProps) {
+  }: createProjectProps) => {
     await response.createProjectRequest(name, description, membersId);
     navigate("/");
   }
 
-  async function activeCreateProject() {
+  const activeCreateProject = async() => {
     createProject({name:nameProject, description:descriptionProject, membersId:listOfUsers})
   }
 
@@ -44,7 +59,7 @@ const CreateProject = () => {
         setDescription={(value) => setDescriptionProjet(value)}
         createProject={() => activeCreateProject()}
       />
-      <ListUsers />
+      <ListUsers addOrRemoveUser={addOrRemoveUser}/>
     </div>
   );
 };

@@ -5,7 +5,11 @@ import { IUser } from "../../Context/UserProvider/types";
 import User from "./User/User";
 import ScrollPage from "./ScrollPage/ScrollPage";
 
-function ListUsers() {
+type listUsersProps = {
+  addOrRemoveUser: () => void
+}
+
+const ListUsers = ({addOrRemoveUser}: listUsersProps) => {
   const response = useUserLogged();
   const [listUsers, setListUsers] = useState<IUser[] | undefined>(undefined);
   const [page, setPage] = useState(1);
@@ -13,11 +17,11 @@ function ListUsers() {
   const [search, setSearch] = useState("");
 
   const totalUserPerPage = 8;
-  async function getUsersList(
+  const getUsersList = async(
     numberOfPages: number,
     totalUserPerPage: number,
     search: string | null
-  ) {
+  ) => {
     const listUsers = await response.getUsersData(
       numberOfPages,
       totalUserPerPage,
@@ -25,7 +29,10 @@ function ListUsers() {
     );
     const pages = listUsers?.count / totalUserPerPage;
     setNumberOfPages(Math.ceil(pages));
-    setListUsers(listUsers?.users);
+    setListUsers(listUsers?.users.map((user: any) => ({
+      ...user,
+      active: false,
+    })));
   }
 
   useEffect(() => {
@@ -33,13 +40,13 @@ function ListUsers() {
 
   }, [page, search]);
 
-  function somar() {
+  const somar = () => {
     if (page < numberOfPages) {
       setPage(page + 1);
     }
   }
 
-  function subtrair() {
+  const subtrair = () => {
     if (page > 1) {
       setPage(page - 1);
     }
@@ -57,7 +64,7 @@ function ListUsers() {
         </div>
 
         {listUsers?.map((user) => (
-          <User key={user.id} name={user.name} role={user.role} email={user.email} />
+          <User key={user.id} id={user.id} name={user.name} role={user.role} email={user.email}  addOrRemoveUser={addOrRemoveUser}/>
         ))}
       </section>
       <ScrollPage
