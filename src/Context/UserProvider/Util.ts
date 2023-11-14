@@ -50,7 +50,7 @@ export async function getusers({page, limit, search}:getUserProps): Promise<IUse
 type createProjectProps = {
   name: string; 
   description: string;
-  membersId: [];
+  membersId: string[];
 }
 
 export async function createProject({name, description, membersId}: createProjectProps) {

@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useRef, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 import styles from "./ListUsers.module.scss";
 import { IUser } from "../../Context/UserProvider/types";
@@ -12,7 +12,7 @@ function ListUsers() {
   const [numberOfPages, setNumberOfPages] = useState(1);
   const [search, setSearch] = useState("");
 
-  const totalUserPerPage = 7;
+  const totalUserPerPage = 8;
   async function getUsersList(
     numberOfPages: number,
     totalUserPerPage: number,
@@ -23,7 +23,7 @@ function ListUsers() {
       totalUserPerPage,
       search
     );
-    const pages = listUsers?.count / 7;
+    const pages = listUsers?.count / totalUserPerPage;
     setNumberOfPages(Math.ceil(pages));
     setListUsers(listUsers?.users);
   }
@@ -57,7 +57,7 @@ function ListUsers() {
         </div>
 
         {listUsers?.map((user) => (
-          <User key={user.id} name={user.name} role={user.role} />
+          <User key={user.id} name={user.name} role={user.role} email={user.email} />
         ))}
       </section>
       <ScrollPage

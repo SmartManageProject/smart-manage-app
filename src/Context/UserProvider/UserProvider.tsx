@@ -48,7 +48,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
   async function createProjectRequest(
     name: string,
     description: string,
-    membersId: []
+    membersId: string[]
   ){
     const response = await createProject({name, description, membersId}).then(
       ({ response }) => response.data

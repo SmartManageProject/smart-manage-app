@@ -15,7 +15,7 @@ export interface IUserLoggedContext extends IUserLogged {
   createProjectRequest: (
     name: string,
     description: string,
-    membersId: []
+    membersId: string[]
   ) => Promise<void>;
 }
 
