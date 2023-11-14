@@ -1,0 +1,27 @@
+.userContainer {
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  margin: 1rem;
+  align-items: center;
+  border-radius: 1rem;
+  gap: 1rem;
+  padding: 0.7rem;
+  .informations{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    .name {
+      color: #000;
+      font-family: Montserrat;
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+    .role{
+      color: #000;
+      font-family: Montserrat;
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+  }
+}

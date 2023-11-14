@@ -1,12 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import {
+  IUser,
   IUserLogged,
   IUserLoggedContext,
   IUserLoggedProvider,
   Project,
-  User,
 } from "./types";
-import { getProjects, getUserData } from "./Util";
+import { getProjects, getUserData, getusers } from "./Util";
 import { getUserLocalStorage } from "../AuthProvider/Util";
 
 export const UserContext = createContext<IUserLoggedContext>(
@@ -17,7 +17,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
   const user = getUserLocalStorage();
   useEffect(() => {
     const fetchData = async () => {
-      const userId = user.id;
+      const userId = user?.id;
       const userLoggedResponse = await getUserData({ userId });
       setUserLogged({
         name: userLoggedResponse.name,
@@ -37,14 +37,14 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
     const projects = await getProjects();
     return projects;
   }
-  async function getUsers(): Promise<User[] | undefined>  {
-    const users = await getUsers();
-    return users
+  async function getUsersData(): Promise<IUser[] | undefined>  {
+    const users = await getusers();
+    return users;
   }
 
   return (
     <UserContext.Provider
-      value={{ ...userLogged, getName, getRole, getProjectsData, getUsers }}
+      value={{ ...userLogged, getName, getRole, getProjectsData, getUsersData }}
     >
       {children}
     </UserContext.Provider>

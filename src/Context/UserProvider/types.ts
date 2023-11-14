@@ -7,7 +7,7 @@ export interface IUserLoggedContext extends IUserLogged {
   getName: () => Promise<string | undefined>;
   getRole: () => Promise<string | undefined>;
   getProjectsData: () => Promise<Project[] | undefined>;
-  getUsers: () => Promise<User[] | undefined>;
+  getUsersData: () => Promise<IUser[] | undefined>;
 }
 
 export interface IUserLoggedProvider {
@@ -20,7 +20,7 @@ export interface Project {
   description: string;
 }
 
-export interface User {
+export interface IUser {
   id: string;
   name: string;
   email: string;
