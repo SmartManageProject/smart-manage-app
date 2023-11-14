@@ -46,3 +46,18 @@ export async function getusers({page, limit, search}:getUserProps): Promise<IUse
     console.error('Erro ao buscar usuários', error);
   }
 }
+
+type createProjectProps = {
+  name: string; 
+  description: string;
+  membersId: [];
+}
+
+export async function createProject({name, description, membersId}: createProjectProps) {
+  try {
+    const request = await Api.post("projects", {name, description, membersId})
+    return request.data;
+  }catch (error) {
+    console.error('Erro ao criar o projeto', error);
+  }
+}
