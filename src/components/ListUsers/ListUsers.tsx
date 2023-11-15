@@ -7,9 +7,10 @@ import ScrollPage from "./ScrollPage/ScrollPage";
 
 type listUsersProps = {
   addOrRemoveUser: () => void
+  usersInList: string[]
 }
 
-const ListUsers = ({addOrRemoveUser}: listUsersProps) => {
+const ListUsers = ({addOrRemoveUser, usersInList}: listUsersProps) => {
   const response = useUserLogged();
   const [listUsers, setListUsers] = useState<IUser[] | undefined>(undefined);
   const [page, setPage] = useState(1);
@@ -31,14 +32,30 @@ const ListUsers = ({addOrRemoveUser}: listUsersProps) => {
     setNumberOfPages(Math.ceil(pages));
     setListUsers(listUsers?.users.map((user: any) => ({
       ...user,
-      active: false,
+      active: usersInList.includes(user.id) ? true : false,
     })));
   }
 
   useEffect(() => {
     getUsersList(page, totalUserPerPage, search);
-
   }, [page, search]);
+
+  const changeActive = () => {
+    usersInList.map((memberId) => {
+      setListUsers((prevListUsers) => {
+        return prevListUsers?.map((user) => {
+          if (user.id === memberId) {
+            return { ...user, active: true };
+          }
+          return {...user, active: usersInList.includes(user.id) ? user.active : false}
+        });
+      });
+    })
+  }
+
+  useEffect(() => {
+    changeActive()
+  }, [usersInList])
 
   const somar = () => {
     if (page < numberOfPages) {
@@ -64,7 +81,7 @@ const ListUsers = ({addOrRemoveUser}: listUsersProps) => {
         </div>
 
         {listUsers?.map((user) => (
-          <User key={user.id} id={user.id} name={user.name} role={user.role} email={user.email}  addOrRemoveUser={addOrRemoveUser}/>
+          <User key={user.id} id={user.id} name={user.name} role={user.role} email={user.email} active={user.active}  addOrRemoveUser={addOrRemoveUser}/>
         ))}
       </section>
       <ScrollPage

@@ -20,6 +20,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
       const userId = user?.id;
       const userLoggedResponse = await getUserData({ userId });
       setUserLogged({
+        id: userLoggedResponse.id,
         name: userLoggedResponse.name,
         role: userLoggedResponse.role,
       });
@@ -27,12 +28,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  async function getName() {
-    return userLogged?.name;
-  }
-  async function getRole() {
-    return userLogged?.role;
-  }
+
   async function getProjectsData(): Promise<Project[] | undefined> {
     const projects = await getProjects();
     return projects;
@@ -60,7 +56,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
 
   return (
     <UserContext.Provider
-      value={{ ...userLogged, getName, getRole, getProjectsData, getUsersData, createProjectRequest }}
+      value={{ ...userLogged, getProjectsData, getUsersData, createProjectRequest }}
     >
       {children}
     </UserContext.Provider>

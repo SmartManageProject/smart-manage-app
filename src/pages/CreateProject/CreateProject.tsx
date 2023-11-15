@@ -7,48 +7,35 @@ import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 import { useNavigate } from "react-router-dom";
 
 const CreateProject = () => {
-  const [listOfUsers, setListOfUsers] = useState<string[]>([]);
   const response = useUserLogged();
   const navigate = useNavigate();
   const [nameProject, setNameProjet] = useState("");
   const [descriptionProject, setDescriptionProjet] = useState("");
-
-
+  const [listOfUsers, setListOfUsers] = useState<string[]>([]);
   const addOrRemoveUser = (id: string) => {
     if(listOfUsers.includes(id)){
-      setListOfUsers(["funcionou o remover"])
-      // setListOfUsers(listOfUsers.filter((item) => item != id))
-      console.log("remove")
+      setListOfUsers(listOfUsers.filter((item) => item != id))
       return
     } 
-    setListOfUsers(["funcionou o adiconar"])
-    // setListOfUsers((prev) => [...prev, id])
-    console.log("add")
+    setListOfUsers((prev) => [...prev, id])
   }
-
-  useEffect(() => (
-    console.log(listOfUsers)
-  ), [listOfUsers])
 
   type createProjectProps = {
     name: string;
     description: string;
     membersId: string[];
   };
-
   const createProject = async ({
     name,
     description,
     membersId,
   }: createProjectProps) => {
     await response.createProjectRequest(name, description, membersId);
+  }
+  const activeCreateProject = async() => {
+    createProject({name:nameProject, description:descriptionProject, membersId:listOfUsers});
     navigate("/");
   }
-
-  const activeCreateProject = async() => {
-    createProject({name:nameProject, description:descriptionProject, membersId:listOfUsers})
-  }
-
   return (
     <div className={styles.container_project}>
       <Header />
@@ -59,7 +46,7 @@ const CreateProject = () => {
         setDescription={(value) => setDescriptionProjet(value)}
         createProject={() => activeCreateProject()}
       />
-      <ListUsers addOrRemoveUser={addOrRemoveUser}/>
+      <ListUsers addOrRemoveUser={addOrRemoveUser} usersInList={listOfUsers}/>
     </div>
   );
 };

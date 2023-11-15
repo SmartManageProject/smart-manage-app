@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styles from './User.module.scss'
 
 type userProps = {
@@ -5,16 +6,17 @@ type userProps = {
   name: string;
   role: string;
   email: string;
+  active: boolean
   addOrRemoveUser: (id: string) => void
 }
 
-const User = ({id, name, role, email, addOrRemoveUser}: userProps) => {
+const User = ({id, name, role, email, active, addOrRemoveUser}: userProps) => {
   const handleToggleUser = () => {
-    console.log(id)
     addOrRemoveUser(id)
   }
+  const mainDivClassName = active ? styles.active : styles.disabled;
   return (
-    <div className={styles.userContainer}>
+    <div className={mainDivClassName}>
       <button onClick={handleToggleUser} className={styles.selectUser}></button>
       <div className={styles.informations}>
         <h3 className={styles.name}>{name} <span>&lt;{role}/&gt;</span></h3>

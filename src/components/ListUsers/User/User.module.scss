@@ -1,4 +1,4 @@
-.userContainer {
+.disabled {
   display: flex;
   flex-direction: row;
   background-color: #fff;
@@ -10,6 +10,48 @@
   .selectUser{
     background: none;
     background-image: url(../../../assets/ei_plus.png);
+    border: none;
+    width: 1.7rem,;
+    height: 1.7rem;
+  }
+  .informations{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    .name {
+      color: #000;
+      font-family: Montserrat;
+      font-size: 1.3rem;
+      font-weight: 500;
+
+    }
+    span{
+      text-align: center;
+      color: #5a5757;
+      font-size: 0.8rem;
+      padding-left: 0.5rem;
+    }
+    .role{
+      color: #000;
+      font-family: Montserrat;
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+  }
+}
+
+.active{
+  display: flex;
+  flex-direction: row;
+  background-color: #CCFFB5;
+  margin: 1rem;
+  align-items: center;
+  border-radius: 1rem;
+  gap: 1rem;
+  padding: 0.7rem;
+  .selectUser{
+    background: none;
+    background-image: url(../../../assets/ei_minus.png);
     border: none;
     width: 1.7rem,;
     height: 1.7rem;

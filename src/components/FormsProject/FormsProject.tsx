@@ -9,7 +9,7 @@ type formsProjectProps = {
   setName: (value: SetStateAction<string>) => void;
   valueDescription: string;
   setDescription: (value: SetStateAction<string>) => void;
-  createProject: () => void
+  createProject: () => void;
 };
 
 const FormsProject = ({
@@ -17,7 +17,7 @@ const FormsProject = ({
   setName,
   valueDescription,
   setDescription,
-  createProject
+  createProject,
 }: formsProjectProps) => {
   const navigate = useNavigate();
   function redirectToCreateProject() {

@@ -1,11 +1,10 @@
 export interface IUserLogged {
+  id?: string;
   name?: string;
   role?: string;
 }
 
 export interface IUserLoggedContext extends IUserLogged {
-  getName: () => Promise<string | undefined>;
-  getRole: () => Promise<string | undefined>;
   getProjectsData: () => Promise<Project[] | undefined>;
   getUsersData: (
     page: number,
