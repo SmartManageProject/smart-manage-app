@@ -5,8 +5,8 @@ import styles from './Header.module.scss'
 
 const Header = () => {
   const user = useUserLogged();
-  const [userName, setUserName] = useState() 
-  const [userRole, setUserRole] = useState() 
+  const [userName, setUserName] = useState<string | undefined>() 
+  const [userRole, setUserRole] = useState<string | undefined>() 
   useEffect(() => {
     setUserName(user.name) 
     setUserRole(user.role) 
