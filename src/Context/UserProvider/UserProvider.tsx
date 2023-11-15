@@ -15,16 +15,17 @@ export const UserContext = createContext<IUserLoggedContext>(
 export const UserPorvider = ({ children }: IUserLoggedProvider) => {
   const [userLogged, setUserLogged] = useState<IUserLogged>();
   const user = getUserLocalStorage();
+
+  const fetchData = async () => {
+    const userId = user?.id;
+    const userLoggedResponse = await getUserData({ userId });
+    setUserLogged({
+      id: userLoggedResponse.id,
+      name: userLoggedResponse.name,
+      role: userLoggedResponse.role,
+    });
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const userId = user?.id;
-      const userLoggedResponse = await getUserData({ userId });
-      setUserLogged({
-        id: userLoggedResponse.id,
-        name: userLoggedResponse.name,
-        role: userLoggedResponse.role,
-      });
-    };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userLogged]);
