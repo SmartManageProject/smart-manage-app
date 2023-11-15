@@ -17,7 +17,6 @@ export async function getUserData({userId}: getUserDataProps) {
 export async function getProjects(): Promise<Project[] | undefined>  {
   try {
     const request = await Api.get('projects')
-    console.log(request.data)
     return request.data
   } catch (error) {
     console.error('Erro ao buscar projetos:', error);
