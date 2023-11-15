@@ -1,0 +1,29 @@
+.usersContainer{
+  border-radius: 10px 0px 0px 10px;
+  background: rgba(49, 170, 178, 0.25);
+  grid-area: sideLayout;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+  section .searchContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+    input {
+      background-image: url(../../assets/material-symbols_search.png);
+      background-repeat: no-repeat;
+      background-position: left;
+      background-position-x: 10px;
+      text-indent: 2rem;
+      height: 1.3rem;
+      width: 100%;
+      border-radius: 30px;
+      padding: 0.5rem;
+      border: none;
+    }
+  }
+  
+}

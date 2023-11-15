@@ -14,13 +14,13 @@ const ProjectSideBar = () => {
   );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  async function suaFuncaoAsync() {
+  async function getProjects() {
     const projectsList = await response.getProjectsData();
     setProjectsList(projectsList);
   }
   useEffect(() => {
-    suaFuncaoAsync();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    getProjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function redirectToCreateProject() {

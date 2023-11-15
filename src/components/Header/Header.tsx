@@ -1,17 +1,16 @@
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { useUserLogged } from "../../Context/UserProvider/useGetUser"
 import styles from './Header.module.scss'
 
 const Header = () => {
-  
   const user = useUserLogged();
-  const [userName, setUserName] = useState<string | undefined>('')
-  const [userRole, setUserRole] = useState<string | undefined>('')
-  async function setData() {
-    setUserName(await user.getName())
-    setUserRole(await user.getRole())
-  }
-  setData()
+  const [userName, setUserName] = useState<string | undefined>() 
+  const [userRole, setUserRole] = useState<string | undefined>() 
+  useEffect(() => {
+    setUserName(user.name) 
+    setUserRole(user.role) 
+  }, [user.name, user.name])
 
   return (
     <header className={styles['header-container']}>
@@ -26,5 +25,4 @@ const Header = () => {
     </header>
   )
 }
-
 export default Header
