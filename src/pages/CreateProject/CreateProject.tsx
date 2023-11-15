@@ -11,7 +11,7 @@ const CreateProject = () => {
   const navigate = useNavigate();
   const [nameProject, setNameProjet] = useState("");
   const [descriptionProject, setDescriptionProjet] = useState("");
-  const [listOfUsers, setListOfUsers] = useState<string[]>([]);
+  const [listOfUsers, setListOfUsers] = useState<string[]>([response.id]);
   const addOrRemoveUser = (id: string) => {
     if(listOfUsers.includes(id)){
       setListOfUsers(listOfUsers.filter((item) => item != id))

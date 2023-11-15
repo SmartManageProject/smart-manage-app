@@ -1,11 +1,17 @@
 
+import { useEffect, useState } from "react";
 import { useUserLogged } from "../../Context/UserProvider/useGetUser"
 import styles from './Header.module.scss'
 
 const Header = () => {
   const user = useUserLogged();
-  const userName = user.name
-  const userRole = user.role
+  const [userName, setUserName] = useState() 
+  const [userRole, setUserRole] = useState() 
+  useEffect(() => {
+    setUserName(user.name) 
+    setUserRole(user.role) 
+  }, [user.name, user.name])
+
   return (
     <header className={styles['header-container']}>
       <img className={styles.logo} src="./logoMenorSmartManage.png" alt="Logo Smart Manage" />
