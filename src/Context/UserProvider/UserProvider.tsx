@@ -27,8 +27,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
   };
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userLogged]);
+  }, []);
 
   async function getProjectsData(): Promise<Project[] | undefined> {
     const projects = await getProjects();

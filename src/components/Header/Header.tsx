@@ -10,7 +10,7 @@ const Header = () => {
   useEffect(() => {
     setUserName(user.name) 
     setUserRole(user.role) 
-  }, [user.name, user.name])
+  }, [user.name, user.role])
 
   return (
     <header className={styles['header-container']}>

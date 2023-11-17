@@ -1,0 +1,33 @@
+.containerMessage {
+  margin: 0.8rem;
+  padding: 0.8rem;
+  border-radius: 0.6rem;
+  background: #4E4E4E;
+  color: #fff;
+  width: 50%;
+  height: auto;
+  gap: 1rem;
+  .userDetails{
+    width: 60%;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.3rem;
+    .name{
+      color: #FFF;
+      font-family: Montserrat;
+      font-size: 1.1rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+    .role{
+      color: #FFF;
+      font-family: Montserrat;
+      font-size: 0.9rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+
+}

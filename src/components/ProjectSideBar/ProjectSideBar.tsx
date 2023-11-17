@@ -25,7 +25,8 @@ const ProjectSideBar = ({selectProjectChat}: projectSideBarProps) => {
   useEffect(() => {
     getProjects();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [projectsList]);
+  }, []);
+
 
   function redirectToCreateProject() {
     navigate("/CreateProject");
@@ -33,7 +34,7 @@ const ProjectSideBar = ({selectProjectChat}: projectSideBarProps) => {
 
   return (
     <div className={styles.container}>
-      <section>
+      <section className={styles.projectsList}>
         {projectsList?.map((project) => (
           <ProjectItem
             key={project.id}

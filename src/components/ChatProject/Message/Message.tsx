@@ -1,35 +1,26 @@
-
+import styles from './Message.module.scss'
 import { useEffect, useState } from 'react';
-import { IUserLogged } from '../../../Context/UserProvider/types';
 import { useUserLogged } from '../../../Context/UserProvider/useGetUser';
 
 type messageProps = {
   userId: string;
+  name: string;
+  role: string;
   children: React.ReactNode;
 }
 
-const Message = ({userId, children}: messageProps) => {
-  const context = useUserLogged()
-
-  const [user, setUser] = useState <IUserLogged>()
-
+const Message = ({userId, name, role, children}: messageProps) => {
+  const user = useUserLogged();
+  const [useIdLogged, setUserIdLogged] = useState<string | undefined>() 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await context.getUserMessageData(userId);
-        setUser(result);
-      } catch (error) {
-        console.log(error)
-      }
-    };
-  
-    fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
+    setUserIdLogged(user.id) 
+  }, [user.id])
   return (
-    <div>
-      <p>{user?.name} - {user?.role}</p>
+    <div className={styles.containerMessage}>
+      <div className={styles.userDetails}>
+        <p className={styles.name}>{name}</p>
+        <p className={styles.role}>{role}</p>
+      </div>
       <p>{children}</p>
     </div>
   )

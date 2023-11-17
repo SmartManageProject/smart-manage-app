@@ -1,6 +1,8 @@
-import { useState } from "react";
+import styles from './ChatProject.module.scss'
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import Message from "./Message/Message";
+import { useUserLogged } from '../../Context/UserProvider/useGetUser';
 
 type chatPrjectProps = {
   projectId: string;
@@ -15,20 +17,54 @@ type Message = {
 const socket = io("http://localhost:3000");
 
 const ChatProject = ({ projectId }: chatPrjectProps) => {
+  const user = useUserLogged();
   const [messages, setMessages] = useState<Message[]>();
+  const [message, setMessage] = useState('');
+  const userId = user.id
+  useEffect(()=>{
+    if(projectId != ''){
+      socket.emit("selectRoom", {projectId}, async (messages: Message[]) => {
+        setMessages(messages);
+      });
+      socket.on("message", (message) => {
+        setMessages((prev) => [message, ...prev ])
+      })
+    }
+  }, [projectId])
 
-  socket.emit("selectRoom", projectId, async (messages: Message[]) => {
-    setMessages(messages);
-  });
+  const sendMenssage = (
+    event: FormEvent,
+    message: string
+  ) => {
+    event.preventDefault();
+    if(message != ''){
+      socket.emit("message", {userId, projectId , text:message})
+      setMessage('')
+    }
 
+  };
 
   return (
-    <div>
-      {messages?.map((message) => (
-        <Message userId={message.userId}>{message.text}</Message>
-      ))}
+    <div className={styles.projectChatContainer}>
+      <div  className={styles.messages}>
+        {messages?.map((message) => (
+          <Message userId={message?.userId} name={message?.user?.name} role={message?.user?.role}>{message.text}</Message>
+        ))}
+      </div>
 
-      <input type="text" />
+      <form >
+        <input
+          type="text"
+          placeholder="Write message"
+          className="message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          required
+        />
+        <button
+          onClick={(event) => sendMenssage(event, message)}
+        ></button>
+      </form>
     </div>
   );
 };

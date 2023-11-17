@@ -7,4 +7,9 @@
   height: 100%;
   width: 100%;
   justify-content: space-between;
+  .projectsList{
+    height: 80vh;
+    content-visibility: auto;
+    overflow-y: auto;
+  }
 }
