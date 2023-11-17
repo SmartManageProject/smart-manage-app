@@ -54,10 +54,20 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
       throw new Error(response.message);
     }
   }
+  async function getUserMessageData(userId: string): Promise<IUserLogged>{
+    const response =  await getUserData({userId})
+    return (
+      {
+        id: response.id, 
+        name: response.name,
+        role: response.role
+      }
+    )
+  }
 
   return (
     <UserContext.Provider
-      value={{ ...userLogged, getProjectsData, getUsersData, createProjectRequest }}
+      value={{ ...userLogged, getProjectsData, getUsersData, createProjectRequest, getUserMessageData }}
     >
       {children}
     </UserContext.Provider>

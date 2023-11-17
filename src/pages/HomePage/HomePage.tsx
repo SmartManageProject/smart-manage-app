@@ -18,7 +18,7 @@ const HomePage = () => {
     <div className={styles.container}>
       <Header/>
       <ProjectSideBar selectProjectChat={selectProjectChat}/>
-      <ChatProject/>
+      <ChatProject projectId = {projectId}/>
     </div>
   );
 };
