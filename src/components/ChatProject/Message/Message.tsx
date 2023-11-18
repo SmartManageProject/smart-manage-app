@@ -1,27 +1,24 @@
 import styles from './Message.module.scss'
-import { useEffect, useState } from 'react';
 import { useUserLogged } from '../../../Context/UserProvider/useGetUser';
 
 type messageProps = {
-  userId: string;
+  email: string;
   name: string;
   role: string;
   children: React.ReactNode;
 }
 
-const Message = ({userId, name, role, children}: messageProps) => {
+const Message = ({email, name, role, children}: messageProps) => {
   const user = useUserLogged();
-  const [useIdLogged, setUserIdLogged] = useState<string | undefined>() 
-  useEffect(() => {
-    setUserIdLogged(user.id) 
-  }, [user.id])
+  const userLoggetMessage = (email == user.email) ? styles.containerMessageLogged : styles.containerMessageOther;
+
   return (
-    <div className={styles.containerMessage}>
+    <div className={userLoggetMessage}>
       <div className={styles.userDetails}>
         <p className={styles.name}>{name}</p>
         <p className={styles.role}>{role}</p>
       </div>
-      <p>{children}</p>
+      <p className={styles.text}>{children}</p>
     </div>
   )
 }

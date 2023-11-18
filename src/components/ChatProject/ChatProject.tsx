@@ -1,8 +1,8 @@
-import styles from './ChatProject.module.scss'
+import styles from "./ChatProject.module.scss";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import Message from "./Message/Message";
-import { useUserLogged } from '../../Context/UserProvider/useGetUser';
+import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 
 type chatPrjectProps = {
   projectId: string;
@@ -19,40 +19,49 @@ const socket = io("http://localhost:3000");
 const ChatProject = ({ projectId }: chatPrjectProps) => {
   const user = useUserLogged();
   const [messages, setMessages] = useState<Message[]>();
-  const [message, setMessage] = useState('');
-  const userId = user.id
-  useEffect(()=>{
-    if(projectId != ''){
-      socket.emit("selectRoom", {projectId}, async (messages: Message[]) => {
+  const [message, setMessage] = useState("");
+  const userId = user.id;
+  useEffect(() => {
+    if (projectId != "") {
+      socket.emit("selectRoom", { projectId }, async (messages: Message[]) => {
+        console.log(messages);
         setMessages(messages);
       });
       socket.on("message", (message) => {
-        setMessages((prev) => [message, ...prev ])
-      })
+        setMessages((prev) => [message, ...prev]);
+      });
     }
-  }, [projectId])
+  }, [projectId]);
 
-  const sendMenssage = (
-    event: FormEvent,
-    message: string
-  ) => {
+  const sendMenssage = (event: FormEvent, message: string) => {
     event.preventDefault();
-    if(message != ''){
-      socket.emit("message", {userId, projectId , text:message})
-      setMessage('')
+    if (message != "") {
+      socket.emit("message", { userId, projectId, text: message });
+      setMessage("");
     }
-
   };
 
   return (
     <div className={styles.projectChatContainer}>
-      <div  className={styles.messages}>
+      <div className={styles.messages}>
         {messages?.map((message) => (
-          <Message userId={message?.userId} name={message?.user?.name} role={message?.user?.role}>{message.text}</Message>
+          <Message
+            key={message.id}
+            active={
+              user.email === message?.user.email
+                ? "styles.containerMessageLogged"
+                : "styles.containerMessageOther"
+            }
+            email={message?.user.email}
+            name={message?.user?.name}
+            role={message?.user?.role}
+          >
+            {message.text}
+          </Message>
         ))}
       </div>
 
-      <form >
+      <form>
         <input
           type="text"
           placeholder="Write message"
@@ -61,9 +70,7 @@ const ChatProject = ({ projectId }: chatPrjectProps) => {
           onChange={(e) => setMessage(e.target.value)}
           required
         />
-        <button
-          onClick={(event) => sendMenssage(event, message)}
-        ></button>
+        <button onClick={(event) => sendMenssage(event, message)}></button>
       </form>
     </div>
   );

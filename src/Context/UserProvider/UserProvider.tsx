@@ -23,6 +23,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
       id: userLoggedResponse.id,
       name: userLoggedResponse.name,
       role: userLoggedResponse.role,
+      email: userLoggedResponse.email
     });
   };
   useEffect(() => {

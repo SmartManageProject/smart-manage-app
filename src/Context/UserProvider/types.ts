@@ -2,6 +2,7 @@ export interface IUserLogged {
   id?: string;
   name?: string;
   role?: string;
+  email?: string
 }
 
 export interface IUserLoggedContext extends IUserLogged {
