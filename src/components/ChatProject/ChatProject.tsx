@@ -18,24 +18,23 @@ const socket = io("http://localhost:3000");
 
 const ChatProject = ({ projectId }: chatPrjectProps) => {
   const user = useUserLogged();
-  const [messages, setMessages] = useState<Message[]>();
+  const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState("");
   const userId = user.id;
   useEffect(() => {
     if (projectId != "") {
       socket.emit("selectRoom", { projectId }, async (messages: Message[]) => {
-        console.log(messages);
         setMessages(messages);
       });
       socket.on("message", (message) => {
-        setMessages((prev) => [message, ...prev]);
+        setMessages([message, ...messages]);
       });
     }
-  }, [projectId]);
+  }, [projectId, messages]);
 
   const sendMenssage = (event: FormEvent, message: string) => {
     event.preventDefault();
-    if (message != "") {
+    if (message.trim() != '') {
       socket.emit("message", { userId, projectId, text: message });
       setMessage("");
     }
@@ -47,14 +46,9 @@ const ChatProject = ({ projectId }: chatPrjectProps) => {
         {messages?.map((message) => (
           <Message
             key={message.id}
-            active={
-              user.email === message?.user.email
-                ? "styles.containerMessageLogged"
-                : "styles.containerMessageOther"
-            }
-            email={message?.user.email}
-            name={message?.user?.name}
-            role={message?.user?.role}
+            email={message.user.email}
+            name={message.user.name}
+            role={message.user.role}
           >
             {message.text}
           </Message>
