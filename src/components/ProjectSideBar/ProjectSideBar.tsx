@@ -6,7 +6,11 @@ import styles from "./ProjectSideBar.module.scss";
 import CreateProjectButton from "./CreateProjectButton/CreateProjectButton";
 import { useNavigate } from "react-router-dom";
 
-const ProjectSideBar = () => {
+type projectSideBarProps = {
+  selectProjectChat: () => void
+}
+
+const ProjectSideBar = ({selectProjectChat}: projectSideBarProps) => {
   const response = useUserLogged();
   const navigate = useNavigate();
   const [projectsList, setProjectsList] = useState<Project[] | undefined>(
@@ -23,18 +27,21 @@ const ProjectSideBar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
   function redirectToCreateProject() {
     navigate("/CreateProject");
   }
 
   return (
     <div className={styles.container}>
-      <section>
+      <section className={styles.projectsList}>
         {projectsList?.map((project) => (
           <ProjectItem
             key={project.id}
             name={project.name}
+            id={project.id}
             description={project.description}
+            selectProjectChat={selectProjectChat}
           />
         ))}
       </section>

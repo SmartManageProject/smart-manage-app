@@ -1,9 +1,14 @@
 import axios from "axios";
 import { getUserLocalStorage } from "../Context/AuthProvider/Util";
+import { io } from "socket.io-client";
+
+
 
 export const Api = axios.create({
   baseURL: "http://localhost:3000/"
 })
+
+export const socket = io();
 
 Api.interceptors.request.use(
   (config) => {

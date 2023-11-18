@@ -2,7 +2,7 @@ import styles from "./CreateProject.module.scss";
 import Header from "../../components/Header/Header";
 import FormsProject from "../../components/FormsProject/FormsProject";
 import ListUsers from "../../components/ListUsers/ListUsers";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 import { useNavigate } from "react-router-dom";
 

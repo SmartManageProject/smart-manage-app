@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styles from './User.module.scss'
 
 type userProps = {

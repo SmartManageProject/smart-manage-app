@@ -2,6 +2,7 @@ export interface IUserLogged {
   id?: string;
   name?: string;
   role?: string;
+  email?: string
 }
 
 export interface IUserLoggedContext extends IUserLogged {
@@ -16,6 +17,7 @@ export interface IUserLoggedContext extends IUserLogged {
     description: string,
     membersId: string[]
   ) => Promise<void>;
+  getUserMessageData: (userId: string) => Promise<IUserLogged>
 }
 
 export interface IUserLoggedProvider {
