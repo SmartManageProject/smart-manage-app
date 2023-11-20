@@ -1,14 +1,9 @@
 import axios from "axios";
 import { getUserLocalStorage } from "../Context/AuthProvider/Util";
-// import { io } from "socket.io-client";
-
-
 
 export const Api = axios.create({
   baseURL: "https://smartmanage-api-ieme.onrender.com/"
 })
-
-// export const socket = io("https://smartmanage-api-ieme.onrender.com/");
 
 Api.interceptors.request.use(
   (config) => {
