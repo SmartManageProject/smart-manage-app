@@ -61,7 +61,7 @@ const CreateUser = ({ changeForm }: createUserProps) => {
           </select>
         </div>
         <div className={styles.buttons}>
-          <Button type="submit">Criar conta</Button>
+          <Button type="submit" >Criar conta</Button>
           <Button change={changeForm}>Já tenho conta</Button>
         </div>
       </form>

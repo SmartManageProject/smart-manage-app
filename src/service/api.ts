@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 
 
 export const Api = axios.create({
-  baseURL: "http://localhost:3000/"
+  baseURL: "https://smartmanage-api-ieme.onrender.com/"
 })
 
 export const socket = io();

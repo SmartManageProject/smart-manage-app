@@ -14,20 +14,18 @@ type Message = {
   text: string;
 };
 
-const socket = io("http://localhost:3000");
+const socket = io("https://smartmanage-api-ieme.onrender.com/");
 
 const ChatProject = ({ projectId }: chatPrjectProps) => {
   const user = useUserLogged();
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState("");
+  const messagesContainerRef = useRef();
   const userId = user.id;
   useEffect(() => {
     if (projectId != "") {
       socket.emit("selectRoom", { projectId }, async (messages: Message[]) => {
         setMessages(messages);
-      });
-      socket.on("message", (message) => {
-        setMessages([message, ...messages]);
       });
     }
   }, [projectId, messages]);
@@ -40,9 +38,10 @@ const ChatProject = ({ projectId }: chatPrjectProps) => {
     }
   };
 
+
   return (
     <div className={styles.projectChatContainer}>
-      <div className={styles.messages}>
+      <div className={styles.messages} ref={messagesContainerRef}>
         {messages?.map((message) => (
           <Message
             key={message.id}

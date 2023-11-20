@@ -6,12 +6,10 @@ import {
   getUserLocalStorage,
   setUserLocalStorage,
 } from "./Util";
-
 export const AuthContext = createContext<IContext>({} as IContext);
 
 export const AuthProvider = ({ children }: IAuthProvider) => {
   const [user, setUser] = useState<IUser | null>();
-
   useEffect(() => {
     const user = getUserLocalStorage();
 
