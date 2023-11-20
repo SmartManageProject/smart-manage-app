@@ -17,13 +17,13 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
   const user = getUserLocalStorage();
 
   const fetchData = async () => {
-    const userId = user?.id;
+    const userId = user.id;
     const userLoggedResponse = await getUserData({ userId });
     setUserLogged({
       id: userLoggedResponse.id,
       name: userLoggedResponse.name,
       role: userLoggedResponse.role,
-      email: userLoggedResponse.email
+      email: userLoggedResponse.email,
     });
   };
   useEffect(() => {
@@ -38,36 +38,43 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
     page: number,
     limit: number,
     search?: string | null
-  ): Promise<{count: number, users:IUser[]} |  undefined> {
+  ): Promise<{ count: number; users: IUser[] } | undefined> {
     const users = await getusers({ page, limit, search });
     return users;
   }
   async function createProjectRequest(
     name: string,
     description: string,
-    membersId: string[]
-  ){
-    const response = await createProject({name, description, membersId}).then(
+    membersId?: string[]
+  ) {
+    const response = await createProject({ name, description, membersId }).then(
       ({ response }) => response.data
     );
     if (response.status === 400) {
       throw new Error(response.message);
     }
   }
-  async function getUserMessageData(userId: string): Promise<IUserLogged>{
-    const response =  await getUserData({userId})
-    return (
-      {
-        id: response.id, 
-        name: response.name,
-        role: response.role
-      }
-    )
+  async function getUserMessageData(
+    userId: string | undefined
+  ): Promise<IUserLogged> {
+    const response = await getUserData({ userId });
+    return {
+      id: response.id,
+      name: response.name,
+      role: response.role,
+      email: response.email,
+    };
   }
 
   return (
     <UserContext.Provider
-      value={{ ...userLogged, getProjectsData, getUsersData, createProjectRequest, getUserMessageData }}
+      value={{
+        ...userLogged,
+        getProjectsData,
+        getUsersData,
+        createProjectRequest,
+        getUserMessageData,
+      }}
     >
       {children}
     </UserContext.Provider>

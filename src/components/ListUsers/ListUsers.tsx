@@ -7,7 +7,7 @@ import User from "./User/User";
 import ScrollPage from "./ScrollPage/ScrollPage";
 
 type listUsersProps = {
-  addOrRemoveUser: () => void;
+  addOrRemoveUser: (id:string) => void;
   usersInList: string[];
 };
 

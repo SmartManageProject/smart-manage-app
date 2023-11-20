@@ -1,8 +1,8 @@
 export interface IUserLogged {
-  id?: string;
-  name?: string;
-  role?: string;
-  email?: string
+  id: string;
+  name: string;
+  role: string;
+  email: string
 }
 
 export interface IUserLoggedContext extends IUserLogged {
@@ -11,13 +11,13 @@ export interface IUserLoggedContext extends IUserLogged {
     page: number,
     limit: number,
     search?: string | null
-  ) => Promise<{count: number, users:IUser[]} |  undefined>
+  ) => Promise<{count: number, users:IUser[]} | undefined>;
   createProjectRequest: (
     name: string,
     description: string,
-    membersId: string[]
+    membersId?: string[]
   ) => Promise<void>;
-  getUserMessageData: (userId: string) => Promise<IUserLogged>
+  getUserMessageData: (userId: string | undefined) => Promise<IUserLogged>
 }
 
 export interface IUserLoggedProvider {

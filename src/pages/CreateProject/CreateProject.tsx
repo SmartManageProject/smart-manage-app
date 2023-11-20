@@ -13,7 +13,7 @@ const CreateProject = () => {
   const [descriptionProject, setDescriptionProjet] = useState("");
   const [listOfUsers, setListOfUsers] = useState<string[]>([response.id]);
   const addOrRemoveUser = (id: string) => {
-    if(listOfUsers.includes(id)){
+    if(listOfUsers?.includes(id)){
       setListOfUsers(listOfUsers.filter((item) => item != id))
       return
     } 
@@ -23,7 +23,7 @@ const CreateProject = () => {
   type createProjectProps = {
     name: string;
     description: string;
-    membersId: string[];
+    membersId?: string[];
   };
   const createProject = async ({
     name,

@@ -2,7 +2,7 @@ import { Api } from "../../service/api";
 import { IUser, Project } from "./types";
 
 type getUserDataProps = {
-  userId: string, 
+  userId?: string|undefined, 
 }
 
 export async function getUserData({userId}: getUserDataProps) {
@@ -49,7 +49,7 @@ export async function getusers({page, limit, search}:getUserProps): Promise<{cou
 type createProjectProps = {
   name: string; 
   description: string;
-  membersId: string[];
+  membersId?: string[];
 }
 
 export async function createProject({name, description, membersId}: createProjectProps) {
