@@ -31,8 +31,13 @@ export interface Project {
 }
 
 export interface IUser {
+  active: any;
   id: string;
   name: string;
   email: string;
   role: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  count: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  users: any;
 }
