@@ -69,7 +69,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
   return (
     <UserContext.Provider
       value={{
-        ...userLogged,
+        ...userLogged!,
         getProjectsData,
         getUsersData,
         createProjectRequest,
