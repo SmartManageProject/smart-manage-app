@@ -34,7 +34,7 @@ const ChatProject = ({ projectId }: chatPrjectProps) => {
 
   const sendMenssage = (event: FormEvent, message: string) => {
     event.preventDefault();
-    if (message.trim() != '') {
+    if (message.trim() != '' && projectId != '') {
       socket.emit("message", { userId, projectId, text: message });
       setMessage("");
     }
