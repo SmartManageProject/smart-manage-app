@@ -20,7 +20,6 @@ const ChatProject = ({ projectId }: chatPrjectProps) => {
   const user = useUserLogged();
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState("");
-  const messagesContainerRef = useRef();
   const userId = user.id;
   useEffect(() => {
     if (projectId != "") {
@@ -41,7 +40,7 @@ const ChatProject = ({ projectId }: chatPrjectProps) => {
 
   return (
     <div className={styles.projectChatContainer}>
-      <div className={styles.messages} ref={messagesContainerRef}>
+      <div className={styles.messages} >
         {messages?.map((message) => (
           <Message
             key={message.id}
