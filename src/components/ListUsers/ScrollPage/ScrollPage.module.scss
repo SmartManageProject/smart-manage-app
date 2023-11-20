@@ -1,0 +1,32 @@
+.pagesContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+  margin: 0 1rem 1rem 1rem;
+  .subtrair{
+    background: none;
+    background-image: url('../../../assets/subtrairPage.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    border: none;
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+  .somar{
+    background: none;
+    background-image: url('../../../assets/somarPage.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    border: none;
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+  p {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}

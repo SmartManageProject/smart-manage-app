@@ -1,0 +1,53 @@
+.createProjectForms_container {
+  grid-area: forms;
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 0 0 1rem;
+  .backToHome {
+    color: rgb(0, 106, 116);
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  .imgProject {
+    max-width: 15rem;
+    max-height: 15rem;
+    margin: 3rem 5rem;
+  }
+  .projectForms {
+    width: 60%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 2rem;
+    .input {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      label {
+        color: #000;
+        font-family: Montserrat;
+        font-size: 1.5rem;
+        font-weight: 400;
+      }
+      input {
+        border-radius: 1rem;
+        border: none;
+        height: 3rem;
+        background: rgba(49, 172, 178, 0.25);
+        padding: 0 1.2rem;
+        font-family: Montserrat;
+        font-size: 1.2rem;
+        color: #000;
+      }
+      .inputDescription {
+        word-wrap: break-word;
+      }
+    }
+  }
+}
