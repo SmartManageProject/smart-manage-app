@@ -38,7 +38,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
     page: number,
     limit: number,
     search?: string | null
-  ): Promise<IUser[] | undefined> {
+  ): Promise<{count: number, users:IUser[]} |  undefined> {
     const users = await getusers({ page, limit, search });
     return users;
   }

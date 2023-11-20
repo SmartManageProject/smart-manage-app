@@ -11,7 +11,7 @@ export interface IUserLoggedContext extends IUserLogged {
     page: number,
     limit: number,
     search?: string | null
-  ) => Promise<IUser[] | undefined>;
+  ) => Promise<{count: number, users:IUser[]} |  undefined>
   createProjectRequest: (
     name: string,
     description: string,
@@ -31,13 +31,9 @@ export interface Project {
 }
 
 export interface IUser {
-  active: any;
+  active: boolean;
   id: string;
   name: string;
   email: string;
   role: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  count: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  users: any;
 }

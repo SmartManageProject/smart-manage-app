@@ -29,7 +29,7 @@ type getUserProps = {
   search?: string | null
 }
 
-export async function getusers({page, limit, search}:getUserProps): Promise<IUser[] | undefined> {
+export async function getusers({page, limit, search}:getUserProps): Promise<{count: number, users:IUser[]} | undefined> {
   if(search){
     try {
       const request = await Api.get(`users?search=${search}&limit=${limit}`)
