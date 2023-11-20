@@ -7,7 +7,7 @@ import CreateProjectButton from "./CreateProjectButton/CreateProjectButton";
 import { useNavigate } from "react-router-dom";
 
 type projectSideBarProps = {
-  selectProjectChat: () => void
+  selectProjectChat: (id?: string) => void
 }
 
 const ProjectSideBar = ({selectProjectChat}: projectSideBarProps) => {

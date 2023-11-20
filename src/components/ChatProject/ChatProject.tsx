@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 
 type chatPrjectProps = {
-  projectId: string;
+  projectId?: string;
 };
 
 type Message = {

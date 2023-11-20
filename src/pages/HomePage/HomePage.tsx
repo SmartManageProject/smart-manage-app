@@ -6,8 +6,8 @@ import ProjectSideBar from "../../components/ProjectSideBar/ProjectSideBar";
 import styles from "./Home.module.scss"
 const HomePage = () => {
 
-  const [projectId, setProjectId] = useState("")
-  const selectProjectChat = (id: string) => {
+  const [projectId, setProjectId] = useState<string | undefined>("")
+  const selectProjectChat = (id?: string) => {
     setProjectId(id)
   }
 

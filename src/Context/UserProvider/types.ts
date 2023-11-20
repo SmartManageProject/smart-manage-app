@@ -17,7 +17,7 @@ export interface IUserLoggedContext extends IUserLogged {
     description: string,
     membersId?: string[]
   ) => Promise<void>;
-  getUserMessageData: (userId: string | undefined) => Promise<IUserLogged>
+  getUserMessageData: (userId: string ) => Promise<IUserLogged>
 }
 
 export interface IUserLoggedProvider {
