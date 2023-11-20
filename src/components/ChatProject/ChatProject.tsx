@@ -1,5 +1,5 @@
 import styles from "./ChatProject.module.scss";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, Key, useEffect,  useState } from "react";
 import { io } from "socket.io-client";
 import Message from "./Message/Message";
 import { useUserLogged } from "../../Context/UserProvider/useGetUser";
@@ -9,6 +9,9 @@ type chatPrjectProps = {
 };
 
 type Message = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user: any;
+  id: Key | null | undefined;
   userId: string;
   projectId: string;
   text: string;
@@ -20,7 +23,6 @@ const ChatProject = ({ projectId }: chatPrjectProps) => {
   const user = useUserLogged();
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState("");
-  const messagesContainerRef = useRef();
   const userId = user.id;
   useEffect(() => {
     if (projectId != "") {
@@ -41,7 +43,7 @@ const ChatProject = ({ projectId }: chatPrjectProps) => {
 
   return (
     <div className={styles.projectChatContainer}>
-      <div className={styles.messages} ref={messagesContainerRef}>
+      <div className={styles.messages} >
         {messages?.map((message) => (
           <Message
             key={message.id}
