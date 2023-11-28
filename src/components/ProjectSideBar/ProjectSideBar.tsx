@@ -24,8 +24,7 @@ const ProjectSideBar = ({selectProjectChat}: projectSideBarProps) => {
   }
   useEffect(() => {
     getProjects();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getProjects]);
 
 
   function redirectToCreateProject() {

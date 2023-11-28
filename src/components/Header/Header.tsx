@@ -9,14 +9,15 @@ const Header = () => {
   const [userName, setUserName] = useState<string | undefined>();
   const [userRole, setUserRole] = useState<string | undefined>();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
   useEffect(() => {
+    
     setUserName(user.name);
     setUserRole(user.role);
-  }, [user.name, user.role]);
+  }, [user.name, user.role, user]);
 
   function resolveModal() {
     setModalIsOpen(!modalIsOpen);
-    console.log(modalIsOpen);
   }
 
   return (
