@@ -5,8 +5,10 @@ import Header from "../../components/Header/Header";
 import ProjectSideBar from "../../components/ProjectSideBar/ProjectSideBar";
 import styles from "./Home.module.scss";
 import { IMessage } from "../../types/AppTypes";
+import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 
 const HomePage = () => {
+  const { updateUserLogged } = useUserLogged();
   const [projectId, setProjectId] = useState("");
   const [messages, setMessages] = useState<IMessage[]>([]);
 
@@ -22,6 +24,10 @@ const HomePage = () => {
       socket.off("message");
     };
   }, []);
+
+  useEffect(() => {
+    updateUserLogged();
+  }, [updateUserLogged]);
 
   useEffect(() => {
     if (projectId !== "") {

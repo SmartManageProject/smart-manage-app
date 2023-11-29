@@ -7,13 +7,12 @@ import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 import { useNavigate } from "react-router-dom";
 
 const CreateProject = () => {
-  const response = useUserLogged();
+  const { createProjectRequest, id } = useUserLogged();
   const navigate = useNavigate();
   const [nameProject, setNameProjet] = useState("");
   const [descriptionProject, setDescriptionProjet] = useState("");
-  const [listOfUsers, setListOfUsers] = useState<string[]>(
-    response.id ? [response.id] : [],
-  );
+  const [listOfUsers, setListOfUsers] = useState<string[]>([id]);
+
   const addOrRemoveUser = (id: string) => {
     if (listOfUsers.includes(id)) {
       setListOfUsers(listOfUsers.filter((item) => item != id));
@@ -32,10 +31,10 @@ const CreateProject = () => {
     description,
     membersId,
   }: createProjectProps) => {
-    await response.createProjectRequest(name, description, membersId);
+    await createProjectRequest(name, description, membersId);
   };
   const activeCreateProject = async () => {
-    createProject({
+    await createProject({
       name: nameProject,
       description: descriptionProject,
       membersId: listOfUsers,
