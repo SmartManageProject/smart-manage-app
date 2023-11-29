@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import {
-  IUser,
   IUserLogged,
   IUserLoggedContext,
   IUserLoggedProvider,
@@ -8,6 +7,7 @@ import {
 } from "./types";
 import { createProject, getProjects, getUserData, getusers } from "./Util";
 import { getUserLocalStorage } from "../AuthProvider/Util";
+import { ListUsersResponse } from "../../types/AppTypes";
 
 export const UserContext = createContext<IUserLoggedContext>(
   {} as IUserLoggedContext,
@@ -35,9 +35,8 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
     page: number,
     limit: number,
     search?: string | null,
-  ): Promise<IUser[] | undefined> {
-    const users = await getusers({ page, limit, search });
-    return users;
+  ): Promise<ListUsersResponse | undefined> {
+    return await getusers({ page, limit, search });
   }
   async function createProjectRequest(
     name: string,

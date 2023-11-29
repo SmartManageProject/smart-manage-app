@@ -6,35 +6,41 @@ import User from "./User/User";
 import ScrollPage from "./ScrollPage/ScrollPage";
 
 type listUsersProps = {
-  addOrRemoveUser: () => void
-  usersInList: string[]
-}
+  addOrRemoveUser: (id: string) => void;
+  usersInList: string[];
+};
 
-const ListUsers = ({addOrRemoveUser, usersInList}: listUsersProps) => {
+type Member = {
+  active: boolean;
+} & IUser;
+
+const ListUsers = ({ addOrRemoveUser, usersInList }: listUsersProps) => {
   const response = useUserLogged();
-  const [listUsers, setListUsers] = useState<IUser[] | undefined>(undefined);
+  const [listUsers, setListUsers] = useState<Member[] | undefined>(undefined);
   const [page, setPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(1);
   const [search, setSearch] = useState("");
 
   const totalUserPerPage = 8;
-  const getUsersList = async(
+  const getUsersList = async (
     numberOfPages: number,
     totalUserPerPage: number,
-    search: string | null
+    search: string | null,
   ) => {
     const listUsers = await response.getUsersData(
       numberOfPages,
       totalUserPerPage,
-      search
+      search,
     );
     const pages = listUsers?.count / totalUserPerPage;
     setNumberOfPages(Math.ceil(pages));
-    setListUsers(listUsers?.users.map((user: any) => ({
-      ...user,
-      active: usersInList.includes(user.id) ? true : false,
-    })));
-  }
+    setListUsers(
+      listUsers?.users.map((user: IUser) => ({
+        ...user,
+        active: usersInList.includes(user.id) ? true : false,
+      })),
+    );
+  };
 
   useEffect(() => {
     getUsersList(page, totalUserPerPage, search);
@@ -47,29 +53,34 @@ const ListUsers = ({addOrRemoveUser, usersInList}: listUsersProps) => {
           if (user.id === memberId) {
             return { ...user, active: true };
           }
-          return {...user, active: usersInList.includes(user.id) ? user.active : false}
+          return {
+            ...user,
+            active: usersInList.includes(user.id) ? user.active : false,
+          };
         });
       });
-    })
-  }
+    });
+  };
 
   useEffect(() => {
-    changeActive()
-  }, [usersInList])
+    changeActive();
+  }, [usersInList]);
 
   const somar = () => {
     if (page < numberOfPages) {
       setPage(page + 1);
     }
-  }
+  };
 
   const subtrair = () => {
     if (page > 1) {
       setPage(page - 1);
     }
-  }
+  };
 
-  const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+  const handleInputChange = (event: {
+    target: { value: SetStateAction<string> };
+  }) => {
     setSearch(event.target.value);
   };
 
@@ -81,7 +92,15 @@ const ListUsers = ({addOrRemoveUser, usersInList}: listUsersProps) => {
         </div>
 
         {listUsers?.map((user) => (
-          <User key={user.id} id={user.id} name={user.name} role={user.role} email={user.email} active={user.active}  addOrRemoveUser={addOrRemoveUser}/>
+          <User
+            key={user.id}
+            id={user.id}
+            name={user.name}
+            role={user.role}
+            email={user.email}
+            active={user.active}
+            addOrRemoveUser={addOrRemoveUser}
+          />
         ))}
       </section>
       <ScrollPage
@@ -91,6 +110,6 @@ const ListUsers = ({addOrRemoveUser, usersInList}: listUsersProps) => {
       />
     </div>
   );
-}
+};
 
 export default ListUsers;

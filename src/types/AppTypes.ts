@@ -12,3 +12,8 @@ export type IMessage = {
   projectId: string;
   text: string;
 };
+
+export type ListUsersResponse = {
+  count: number;
+  users: IUser[];
+};

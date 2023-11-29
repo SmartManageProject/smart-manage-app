@@ -11,7 +11,7 @@ type projectSideBarProps = {
 };
 
 const ProjectSideBar = ({ selectProjectChat }: projectSideBarProps) => {
-  const response = useUserLogged();
+  const { getProjectsData } = useUserLogged();
   const navigate = useNavigate();
   const [projectsList, setProjectsList] = useState<Project[] | undefined>(
     undefined,
@@ -19,11 +19,11 @@ const ProjectSideBar = ({ selectProjectChat }: projectSideBarProps) => {
 
   useEffect(() => {
     async function getProjects() {
-      const projectsList = await response.getProjectsData();
+      const projectsList = await getProjectsData();
       setProjectsList(projectsList);
     }
     getProjects();
-  }, [response]);
+  }, [getProjectsData]);
 
   function redirectToCreateProject() {
     navigate("/CreateProject");
