@@ -1,21 +1,43 @@
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { socket } from "../../service/api";
 import ChatProject from "../../components/ChatProject/ChatProject";
 import Header from "../../components/Header/Header";
 import ProjectSideBar from "../../components/ProjectSideBar/ProjectSideBar";
-import styles from "./Home.module.scss"
-const HomePage = () => {
+import styles from "./Home.module.scss";
+import { IMessage } from "../../types/AppTypes";
 
-  const [projectId, setProjectId] = useState("")
-  const selectProjectChat = (id: string) => {
-    setProjectId(id)
-  }
+const HomePage = () => {
+  const [projectId, setProjectId] = useState("");
+  const [messages, setMessages] = useState<IMessage[]>([]);
+
+  useEffect(() => {
+    socket.connect();
+
+    socket.on("message", (message: IMessage) => {
+      setMessages((prev) => [...prev, message]);
+    });
+
+    return () => {
+      socket.disconnect();
+      socket.off("message");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (projectId !== "") {
+      socket.emit("selectRoom", { projectId }, async (messages: IMessage[]) => {
+        setMessages(messages);
+      });
+    }
+  }, [projectId]);
 
   return (
     <div className={styles.container}>
-      <Header/>
-      <ProjectSideBar selectProjectChat={selectProjectChat}/>
-      <ChatProject projectId = {projectId}/>
+      <Header />
+      <ProjectSideBar selectProjectChat={setProjectId} />
+      {projectId !== "" && (
+        <ChatProject messages={messages} projectId={projectId} />
+      )}
     </div>
   );
 };

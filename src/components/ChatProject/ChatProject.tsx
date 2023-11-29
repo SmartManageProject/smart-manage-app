@@ -1,49 +1,32 @@
 import styles from "./ChatProject.module.scss";
-import { FormEvent, Key, useEffect,  useState } from "react";
-import { io } from "socket.io-client";
+import { FormEvent, useRef, useState } from "react";
+import { socket } from "../../service/api";
 import Message from "./Message/Message";
 import { useUserLogged } from "../../Context/UserProvider/useGetUser";
+import { IMessage } from "../../types/AppTypes";
 
-type chatPrjectProps = {
+type chatProjectProps = {
+  messages: IMessage[];
   projectId: string;
 };
 
-type Message = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  user: any;
-  id: Key | null | undefined;
-  userId: string;
-  projectId: string;
-  text: string;
-};
-
-const socket = io("https://smartmanage-api-ieme.onrender.com/");
-
-const ChatProject = ({ projectId }: chatPrjectProps) => {
+const ChatProject = ({ messages, projectId }: chatProjectProps) => {
   const user = useUserLogged();
-  const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState("");
   const userId = user.id;
-  useEffect(() => {
-    if (projectId != "") {
-      socket.emit("selectRoom", { projectId }, async (messages: Message[]) => {
-        setMessages(messages);
-      });
-    }
-  }, [projectId, messages]);
 
-  const sendMenssage = (event: FormEvent, message: string) => {
+  const sendMessage = (event: FormEvent) => {
     event.preventDefault();
-    if (message.trim() != '') {
+
+    if (message.trim() !== "") {
       socket.emit("message", { userId, projectId, text: message });
       setMessage("");
     }
   };
 
-
   return (
     <div className={styles.projectChatContainer}>
-      <div className={styles.messages} >
+      <div className={styles.messages}>
         {messages?.map((message) => (
           <Message
             key={message.id}
@@ -56,7 +39,7 @@ const ChatProject = ({ projectId }: chatPrjectProps) => {
         ))}
       </div>
 
-      <form>
+      <form onSubmit={sendMessage}>
         <input
           type="text"
           placeholder="Write message"
@@ -65,7 +48,7 @@ const ChatProject = ({ projectId }: chatPrjectProps) => {
           onChange={(e) => setMessage(e.target.value)}
           required
         />
-        <button onClick={(event) => sendMenssage(event, message)}></button>
+        <button type="submit"></button>
       </form>
     </div>
   );
