@@ -2,22 +2,23 @@ export interface IUserLogged {
   id?: string;
   name?: string;
   role?: string;
-  email?: string
+  email?: string;
 }
 
 export interface IUserLoggedContext extends IUserLogged {
+  updateUserLogged: () => Promise<void>;
   getProjectsData: () => Promise<Project[] | undefined>;
   getUsersData: (
     page: number,
     limit: number,
-    search?: string | null
+    search?: string | null,
   ) => Promise<IUser[] | undefined>;
   createProjectRequest: (
     name: string,
     description: string,
-    membersId: string[]
+    membersId: string[],
   ) => Promise<void>;
-  getUserMessageData: (userId: string) => Promise<IUserLogged>
+  getUserMessageData: (userId: string) => Promise<IUserLogged>;
 }
 
 export interface IUserLoggedProvider {

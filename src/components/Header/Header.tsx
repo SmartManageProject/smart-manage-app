@@ -5,16 +5,14 @@ import styles from "./Header.module.scss";
 import Modal from "./Modal/Modal";
 
 const Header = () => {
-  const user = useUserLogged();
-  const [userName, setUserName] = useState<string | undefined>();
-  const [userRole, setUserRole] = useState<string | undefined>();
+  const { updateUserLogged, name, role } = useUserLogged();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    
-    setUserName(user.name);
-    setUserRole(user.role);
-  }, [user.name, user.role, user]);
+    if (!name || !role) {
+      updateUserLogged();
+    }
+  }, [name, role, updateUserLogged]);
 
   function resolveModal() {
     setModalIsOpen(!modalIsOpen);
@@ -29,8 +27,8 @@ const Header = () => {
       />
       <div onClick={() => resolveModal()} className={styles.userContainer}>
         <div className={styles.userInformation}>
-          <p className={styles.nome}>{userName}</p>
-          <p className={styles.role}>{userRole}</p>
+          <p className={styles.nome}>{name}</p>
+          <p className={styles.role}>{role}</p>
         </div>
         <img src="./userIcon.png" alt="Icone de usuário" />
       </div>

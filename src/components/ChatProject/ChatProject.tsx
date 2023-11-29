@@ -1,5 +1,5 @@
 import styles from "./ChatProject.module.scss";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useState } from "react";
 import { socket } from "../../service/api";
 import Message from "./Message/Message";
 import { useUserLogged } from "../../Context/UserProvider/useGetUser";

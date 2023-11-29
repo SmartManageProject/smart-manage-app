@@ -3,13 +3,15 @@ import Button from "../../Button/Button";
 import { useAuth } from "../../../Context/AuthProvider/useAuth";
 import { FormEvent, useRef } from "react";
 import styles from "./Login.module.scss";
+import { useUserLogged } from "../../../Context/UserProvider/useGetUser";
 
 type loginProps = {
   changeForm: () => void;
-}
+};
 
-const Login = ({changeForm}: loginProps)=> {
+const Login = ({ changeForm }: loginProps) => {
   const auth = useAuth();
+  const { updateUserLogged } = useUserLogged();
   const navigate = useNavigate();
 
   async function onSubmitLogin(event: FormEvent) {
@@ -17,8 +19,9 @@ const Login = ({changeForm}: loginProps)=> {
     try {
       await auth.authenticate(
         emailRef.current?.value,
-        passwordRef.current?.value
+        passwordRef.current?.value,
       );
+      await updateUserLogged();
       navigate("/");
     } catch (error) {
       alert("Usuário ou senha inválido");
