@@ -7,26 +7,26 @@ import CreateProjectButton from "./CreateProjectButton/CreateProjectButton";
 import { useNavigate } from "react-router-dom";
 
 type projectSideBarProps = {
-  selectProjectChat: (id?: string) => void
-}
 
-const ProjectSideBar = ({selectProjectChat}: projectSideBarProps) => {
-  const response = useUserLogged();
+  selectProjectChat: (id: string) => void;
+  selectProjectDescription: (description: string) => void;
+};
+
+
+const ProjectSideBar = ({ selectProjectChat,selectProjectDescription }: projectSideBarProps) => {
+  const { getProjectsData } = useUserLogged();
   const navigate = useNavigate();
   const [projectsList, setProjectsList] = useState<Project[] | undefined>(
-    undefined
+    undefined,
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  async function getProjects() {
-    const projectsList = await response.getProjectsData();
-    setProjectsList(projectsList);
-  }
   useEffect(() => {
+    async function getProjects() {
+      const projectsList = await getProjectsData();
+      setProjectsList(projectsList);
+    }
     getProjects();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  }, [getProjectsData]);
 
   function redirectToCreateProject() {
     navigate("/CreateProject");
@@ -42,6 +42,7 @@ const ProjectSideBar = ({selectProjectChat}: projectSideBarProps) => {
             id={project.id}
             description={project.description}
             selectProjectChat={selectProjectChat}
+            selectProjectDescription = {selectProjectDescription }
           />
         ))}
       </section>

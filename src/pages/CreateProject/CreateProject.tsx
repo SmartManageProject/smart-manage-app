@@ -7,18 +7,21 @@ import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 import { useNavigate } from "react-router-dom";
 
 const CreateProject = () => {
-  const response = useUserLogged();
+  const { createProjectRequest, id } = useUserLogged();
   const navigate = useNavigate();
   const [nameProject, setNameProjet] = useState("");
   const [descriptionProject, setDescriptionProjet] = useState("");
-  const [listOfUsers, setListOfUsers] = useState<string[]>([response.id]);
+  const [listOfUsers, setListOfUsers] = useState<string[]>([id]);
+
   const addOrRemoveUser = (id: string) => {
-    if(listOfUsers?.includes(id)){
-      setListOfUsers(listOfUsers.filter((item) => item != id))
-      return
-    } 
-    setListOfUsers((prev) => [...prev, id])
-  }
+
+    if (listOfUsers.includes(id)) {
+      setListOfUsers(listOfUsers.filter((item) => item != id));
+      return;
+    }
+    setListOfUsers((prev) => [...prev, id]);
+  };
+
 
   type createProjectProps = {
     name: string;
@@ -30,12 +33,16 @@ const CreateProject = () => {
     description,
     membersId,
   }: createProjectProps) => {
-    await response.createProjectRequest(name, description, membersId);
-  }
-  const activeCreateProject = async() => {
-    createProject({name:nameProject, description:descriptionProject, membersId:listOfUsers});
+    await createProjectRequest(name, description, membersId);
+  };
+  const activeCreateProject = async () => {
+    await createProject({
+      name: nameProject,
+      description: descriptionProject,
+      membersId: listOfUsers,
+    });
     navigate("/");
-  }
+  };
   return (
     <div className={styles.container_project}>
       <Header />
@@ -46,7 +53,7 @@ const CreateProject = () => {
         setDescription={(value) => setDescriptionProjet(value)}
         createProject={() => activeCreateProject()}
       />
-      <ListUsers addOrRemoveUser={addOrRemoveUser} usersInList={listOfUsers}/>
+      <ListUsers addOrRemoveUser={addOrRemoveUser} usersInList={listOfUsers} />
     </div>
   );
 };

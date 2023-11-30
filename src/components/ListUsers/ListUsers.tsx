@@ -7,13 +7,19 @@ import User from "./User/User";
 import ScrollPage from "./ScrollPage/ScrollPage";
 
 type listUsersProps = {
-  addOrRemoveUser: (id:string) => void;
+
+  addOrRemoveUser: (id: string) => void;
   usersInList: string[];
 };
 
+type Member = {
+  active: boolean;
+} & IUser;
+
 const ListUsers = ({ addOrRemoveUser, usersInList }: listUsersProps) => {
   const response = useUserLogged();
-  const [listUsers, setListUsers] = useState< IUser[] |  undefined >(undefined);
+  const [listUsers, setListUsers] = useState<Member[] | undefined>(undefined);
+
   const [page, setPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(1);
   const [search, setSearch] = useState("");
@@ -22,28 +28,23 @@ const ListUsers = ({ addOrRemoveUser, usersInList }: listUsersProps) => {
   const getUsersList = async (
     numberOfPages: number,
     totalUserPerPage: number,
-    search: string | null
+    search: string | null,
   ) => {
     const listUsers = await response.getUsersData(
       numberOfPages,
       totalUserPerPage,
-      search
+      search,
     );
-    if (listUsers) {
-      const { users, count } = listUsers;
 
-      if (users && count !== undefined) {
-        const pages = count / totalUserPerPage;
-        setNumberOfPages(Math.ceil(pages));
-        setListUsers(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          users.map((user: any) => ({
-            ...user,
-            active: usersInList.includes(user.id) ? true : false,
-          }))
-        );
-      }
-    }
+    const pages = listUsers?.count / totalUserPerPage;
+    setNumberOfPages(Math.ceil(pages));
+    setListUsers(
+      listUsers?.users.map((user: IUser) => ({
+        ...user,
+        active: usersInList.includes(user.id) ? true : false,
+      })),
+    );
+
   };
 
   useEffect(() => {
@@ -96,7 +97,8 @@ const ListUsers = ({ addOrRemoveUser, usersInList }: listUsersProps) => {
           <input value={search} onChange={handleInputChange} type="text" />
         </div>
 
-        {listUsers?.map((user: any) => (
+        {listUsers?.map((user) => (
+
           <User
             key={user.id}
             id={user.id}

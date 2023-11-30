@@ -16,7 +16,7 @@ export function getUserLocalStorage() {
 
 export async function LoginResquest(
   email: string | null | undefined,
-  password: string | null | undefined
+  password: string | null | undefined,
 ) {
   try {
     const request = await Api.post("authenticate", { email, password });
@@ -30,12 +30,14 @@ export async function CreateUser(
   name: string | null | undefined,
   email: string | null | undefined,
   password: string | null | undefined,
-  role: string | null | undefined
+  role: string | null | undefined,
 ) {
-  try {
-    const request = await Api.post("users", { name, email, password, role });
-    return request.data;
-  } catch (error) {
-    return error;
-  }
+  return await Api.post("users", {
+    name,
+    email,
+    password,
+    role,
+  })
+    .then((res) => ({ data: { ...res.data }, status: res.status }))
+    .catch((err) => err.response.data);
 }

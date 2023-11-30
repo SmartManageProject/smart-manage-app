@@ -1,6 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import {
-  IUser,
   IUserLogged,
   IUserLoggedContext,
   IUserLoggedProvider,
@@ -8,27 +7,26 @@ import {
 } from "./types";
 import { createProject, getProjects, getUserData, getusers } from "./Util";
 import { getUserLocalStorage } from "../AuthProvider/Util";
+import { ListUsersResponse } from "../../types/AppTypes";
 
 export const UserContext = createContext<IUserLoggedContext>(
-  {} as IUserLoggedContext
+  {} as IUserLoggedContext,
 );
 export const UserPorvider = ({ children }: IUserLoggedProvider) => {
   const [userLogged, setUserLogged] = useState<IUserLogged>();
-  const user = getUserLocalStorage();
 
-  const fetchData = async () => {
-    const userId = user.id;
-    const userLoggedResponse = await getUserData({ userId });
+
+  async function updateUserLogged(): Promise<void> {
+    const { id } = getUserLocalStorage();
+
+    const userLoggedResponse = await getUserData({ userId: id });
     setUserLogged({
       id: userLoggedResponse.id,
       name: userLoggedResponse.name,
       role: userLoggedResponse.role,
       email: userLoggedResponse.email,
     });
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  }
 
   async function getProjectsData(): Promise<Project[] | undefined> {
     const projects = await getProjects();
@@ -37,26 +35,29 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
   async function getUsersData(
     page: number,
     limit: number,
-    search?: string | null
-  ): Promise<{ count: number; users: IUser[] } | undefined> {
-    const users = await getusers({ page, limit, search });
-    return users;
+
+    search?: string | null,
+  ): Promise<ListUsersResponse | undefined> {
+    return await getusers({ page, limit, search });
+
   }
   async function createProjectRequest(
     name: string,
     description: string,
-    membersId?: string[]
+
+    membersId: string[],
   ) {
     const response = await createProject({ name, description, membersId }).then(
-      ({ response }) => response.data
+
     );
+
     if (response.status === 400) {
       throw new Error(response.message);
     }
   }
-  async function getUserMessageData(
-    userId: string | undefined
-  ): Promise<IUserLogged> {
+
+  async function getUserMessageData(userId: string): Promise<IUserLogged> {
+
     const response = await getUserData({ userId });
     return {
       id: response.id,
@@ -69,7 +70,8 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
   return (
     <UserContext.Provider
       value={{
-        ...userLogged!,
+        ...userLogged,
+        updateUserLogged,
         getProjectsData,
         getUsersData,
         createProjectRequest,
