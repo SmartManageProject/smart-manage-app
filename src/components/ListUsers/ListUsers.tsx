@@ -9,7 +9,7 @@ import ScrollPage from "./ScrollPage/ScrollPage";
 type listUsersProps = {
 
   addOrRemoveUser: (id: string) => void;
-  usersInList: string[];
+  usersInList: (string | undefined)[];
 };
 
 type Member = {
@@ -35,15 +35,21 @@ const ListUsers = ({ addOrRemoveUser, usersInList }: listUsersProps) => {
       totalUserPerPage,
       search,
     );
-
-    const pages = listUsers?.count / totalUserPerPage;
-    setNumberOfPages(Math.ceil(pages));
-    setListUsers(
-      listUsers?.users.map((user: IUser) => ({
-        ...user,
-        active: usersInList.includes(user.id) ? true : false,
-      })),
-    );
+    if (listUsers && listUsers.count !== undefined) {
+      const pages = listUsers.count / totalUserPerPage;
+      setNumberOfPages(Math.ceil(pages));
+    
+      setListUsers(
+        listUsers.users.map((user: IUser) => ({
+          ...user,
+          active: usersInList.includes(user.id) ? true : false,
+        })),
+      );
+    } else {
+      // Trate o caso em que listUsers ou listUsers.count é undefined.
+      // Por exemplo, defina um valor padrão ou lide de acordo com a lógica do seu aplicativo.
+      console.error("Erro: listUsers ou listUsers.count é undefined");
+    }
 
   };
 

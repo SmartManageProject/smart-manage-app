@@ -3,7 +3,6 @@ import { ListUsersResponse } from "../../types/AppTypes";
 import { Project } from "./types";
 
 type getUserDataProps = {
-
   userId: string;
 };
 
@@ -58,7 +57,7 @@ export async function getusers({
 type createProjectProps = {
   name: string;
   description: string;
-  membersId: string[];
+  membersId: (string | undefined)[];
 };
 
 

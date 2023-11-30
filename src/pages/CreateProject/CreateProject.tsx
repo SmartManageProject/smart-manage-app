@@ -11,7 +11,7 @@ const CreateProject = () => {
   const navigate = useNavigate();
   const [nameProject, setNameProjet] = useState("");
   const [descriptionProject, setDescriptionProjet] = useState("");
-  const [listOfUsers, setListOfUsers] = useState<string[]>([id]);
+  const [listOfUsers, setListOfUsers] = useState<(string | undefined)[]>([id]);
 
   const addOrRemoveUser = (id: string) => {
 
@@ -26,7 +26,7 @@ const CreateProject = () => {
   type createProjectProps = {
     name: string;
     description: string;
-    membersId?: string[];
+    membersId: (string | undefined)[];
   };
   const createProject = async ({
     name,
