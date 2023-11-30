@@ -31,10 +31,10 @@ const ChatProject = ({
 
   return (
     <div className={styles.projectChatContainer}>
+      <div className={styles.fixed}>
+        <p>{projectDescription}</p>
+      </div>
       <div className={styles.messages}>
-        <div className={styles.fixed}>
-          <p>{projectDescription}</p>
-        </div>
         {messages?.map((message) => (
           <Message
             key={message.id}

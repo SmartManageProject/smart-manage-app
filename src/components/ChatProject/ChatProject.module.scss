@@ -3,14 +3,14 @@
   flex-direction: column;
   justify-content: space-between;
   height: 90vh;
-  .fixed{
-    background-color:#D0D4CE;
-    margin: 1rem 1rem;
-    border-radius: 1rem;
-    p{
+  .fixed {
+    p {
       text-align: center;
       font-size: 1.5rem;
       padding: 1rem 0;
+      background-color: #d0d4ce;
+      margin: 1rem 1rem 0 1rem;
+      border-radius: 1rem;
     }
   }
   .messages {
@@ -19,20 +19,19 @@
     flex-direction: column;
     content-visibility: auto;
     overflow-y: auto;
-
   }
-  .messages::-webkit-scrollbar-track{
-	/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
-	border-radius:0;
-	background-color: #D0D4CE;
+  .messages::-webkit-scrollbar-track {
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
+    border-radius: 0;
+    background-color: #d0d4ce;
   }
-  .messages::-webkit-scrollbar{
+  .messages::-webkit-scrollbar {
     width: 6px;
     background-color: #00696c;
   }
-  .messages::-webkit-scrollbar-thumb{
-    border-radius:0;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  .messages::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #1fc6cc;
   }
   form {
@@ -58,7 +57,7 @@
       word-wrap: break-word;
     }
 
-    input:focus{
+    input:focus {
       box-shadow: 0 0 0 0;
       outline: 0;
     }
