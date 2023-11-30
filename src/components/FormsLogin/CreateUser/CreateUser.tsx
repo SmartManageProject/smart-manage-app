@@ -3,28 +3,29 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../Context/AuthProvider/useAuth";
 import styles from "./CreateUser.module.scss";
 import Button from "../../Button/Button";
+import { useUserLogged } from "../../../Context/UserProvider/useGetUser";
 
 type createUserProps = {
   changeForm?: () => void;
 };
 
 const CreateUser = ({ changeForm }: createUserProps) => {
-  const newUser = useAuth();
+  const { createUser, authenticate } = useAuth();
+  const { updateUserLogged } = useUserLogged();
   const navigate = useNavigate();
 
   async function onSubmitCreateUser(event: FormEvent) {
     event.preventDefault();
     try {
-      await newUser.createUser(
+      await createUser(
         nameRef.current?.value,
         emailRef.current?.value,
         passwordRef.current?.value,
         roleRef.current?.value,
       );
-      await newUser.authenticate(
-        emailRef.current?.value,
-        passwordRef.current?.value,
-      );
+      await authenticate(emailRef.current?.value, passwordRef.current?.value);
+      await updateUserLogged();
+
       navigate("/");
     } catch (error) {
       alert("Usuário já existe");
