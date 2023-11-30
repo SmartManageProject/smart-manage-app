@@ -4,7 +4,9 @@ export interface IUserLogged {
   id: string;
   name: string;
   role: string;
+
   email: string;
+
 }
 
 export interface IUserLoggedContext extends IUserLogged {
@@ -21,6 +23,7 @@ export interface IUserLoggedContext extends IUserLogged {
     membersId: string[],
   ) => Promise<void>;
   getUserMessageData: (userId: string) => Promise<IUserLogged>;
+
 }
 
 export interface IUserLoggedProvider {
@@ -34,6 +37,7 @@ export interface Project {
 }
 
 export interface IUser {
+  active: boolean;
   id: string;
   name: string;
   email: string;

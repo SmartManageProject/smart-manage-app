@@ -7,9 +7,11 @@ import CreateProjectButton from "./CreateProjectButton/CreateProjectButton";
 import { useNavigate } from "react-router-dom";
 
 type projectSideBarProps = {
+
   selectProjectChat: (id: string) => void;
   selectProjectDescription: (description: string) => void;
 };
+
 
 const ProjectSideBar = ({ selectProjectChat,selectProjectDescription }: projectSideBarProps) => {
   const { getProjectsData } = useUserLogged();

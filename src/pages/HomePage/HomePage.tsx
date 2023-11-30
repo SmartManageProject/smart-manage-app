@@ -32,6 +32,7 @@ const HomePage = () => {
     }
   }, [projectId]);
 
+
   return (
     <div className={styles.container}>
       <Header />

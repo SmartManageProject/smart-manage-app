@@ -15,6 +15,7 @@ export const UserContext = createContext<IUserLoggedContext>(
 export const UserPorvider = ({ children }: IUserLoggedProvider) => {
   const [userLogged, setUserLogged] = useState<IUserLogged>();
 
+
   async function updateUserLogged(): Promise<void> {
     const { id } = getUserLocalStorage();
 
@@ -34,24 +35,29 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
   async function getUsersData(
     page: number,
     limit: number,
+
     search?: string | null,
   ): Promise<ListUsersResponse | undefined> {
     return await getusers({ page, limit, search });
+
   }
   async function createProjectRequest(
     name: string,
     description: string,
+
     membersId: string[],
   ) {
     const response = await createProject({ name, description, membersId }).then(
-      (response) => response,
+
     );
 
     if (response.status === 400) {
       throw new Error(response.message);
     }
   }
+
   async function getUserMessageData(userId: string): Promise<IUserLogged> {
+
     const response = await getUserData({ userId });
     return {
       id: response.id,

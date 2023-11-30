@@ -9,6 +9,7 @@ type chatProjectProps = {
   messages: IMessage[];
   projectId: string;
   projectDescription: string;
+
 };
 
 const ChatProject = ({
@@ -24,6 +25,7 @@ const ChatProject = ({
     event.preventDefault();
 
     if (message.trim() !== "") {
+
       socket.emit("message", { userId, projectId, text: message });
       setMessage("");
     }

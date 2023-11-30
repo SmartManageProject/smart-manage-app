@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SetStateAction, useEffect, useState } from "react";
 import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 import styles from "./ListUsers.module.scss";
@@ -6,6 +7,7 @@ import User from "./User/User";
 import ScrollPage from "./ScrollPage/ScrollPage";
 
 type listUsersProps = {
+
   addOrRemoveUser: (id: string) => void;
   usersInList: string[];
 };
@@ -17,6 +19,7 @@ type Member = {
 const ListUsers = ({ addOrRemoveUser, usersInList }: listUsersProps) => {
   const response = useUserLogged();
   const [listUsers, setListUsers] = useState<Member[] | undefined>(undefined);
+
   const [page, setPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(1);
   const [search, setSearch] = useState("");
@@ -32,6 +35,7 @@ const ListUsers = ({ addOrRemoveUser, usersInList }: listUsersProps) => {
       totalUserPerPage,
       search,
     );
+
     const pages = listUsers?.count / totalUserPerPage;
     setNumberOfPages(Math.ceil(pages));
     setListUsers(
@@ -40,6 +44,7 @@ const ListUsers = ({ addOrRemoveUser, usersInList }: listUsersProps) => {
         active: usersInList.includes(user.id) ? true : false,
       })),
     );
+
   };
 
   useEffect(() => {
@@ -49,7 +54,8 @@ const ListUsers = ({ addOrRemoveUser, usersInList }: listUsersProps) => {
   const changeActive = () => {
     usersInList.map((memberId) => {
       setListUsers((prevListUsers) => {
-        return prevListUsers?.map((user) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return prevListUsers?.map((user: any) => {
           if (user.id === memberId) {
             return { ...user, active: true };
           }
@@ -92,6 +98,7 @@ const ListUsers = ({ addOrRemoveUser, usersInList }: listUsersProps) => {
         </div>
 
         {listUsers?.map((user) => (
+
           <User
             key={user.id}
             id={user.id}

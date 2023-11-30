@@ -3,8 +3,10 @@ import { ListUsersResponse } from "../../types/AppTypes";
 import { Project } from "./types";
 
 type getUserDataProps = {
+
   userId: string;
 };
+
 
 export async function getUserData({ userId }: getUserDataProps) {
   try {
@@ -30,12 +32,14 @@ type getUserProps = {
   search?: string | null;
 };
 
+
 export async function getusers({
   page,
   limit,
   search,
 }: getUserProps): Promise<ListUsersResponse | undefined> {
   if (search) {
+
     try {
       const request = await Api.get(`users?search=${search}&limit=${limit}`);
       return request.data;
@@ -56,6 +60,7 @@ type createProjectProps = {
   description: string;
   membersId: string[];
 };
+
 
 export async function createProject({
   name,

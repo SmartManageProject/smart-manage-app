@@ -14,6 +14,7 @@ const CreateProject = () => {
   const [listOfUsers, setListOfUsers] = useState<string[]>([id]);
 
   const addOrRemoveUser = (id: string) => {
+
     if (listOfUsers.includes(id)) {
       setListOfUsers(listOfUsers.filter((item) => item != id));
       return;
@@ -21,10 +22,11 @@ const CreateProject = () => {
     setListOfUsers((prev) => [...prev, id]);
   };
 
+
   type createProjectProps = {
     name: string;
     description: string;
-    membersId: string[];
+    membersId?: string[];
   };
   const createProject = async ({
     name,
