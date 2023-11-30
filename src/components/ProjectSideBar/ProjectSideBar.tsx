@@ -8,9 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 type projectSideBarProps = {
   selectProjectChat: (id: string) => void;
+  selectProjectDescription: (description: string) => void;
 };
 
-const ProjectSideBar = ({ selectProjectChat }: projectSideBarProps) => {
+const ProjectSideBar = ({ selectProjectChat,selectProjectDescription }: projectSideBarProps) => {
   const { getProjectsData } = useUserLogged();
   const navigate = useNavigate();
   const [projectsList, setProjectsList] = useState<Project[] | undefined>(
@@ -39,6 +40,7 @@ const ProjectSideBar = ({ selectProjectChat }: projectSideBarProps) => {
             id={project.id}
             description={project.description}
             selectProjectChat={selectProjectChat}
+            selectProjectDescription = {selectProjectDescription }
           />
         ))}
       </section>

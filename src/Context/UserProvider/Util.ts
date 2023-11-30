@@ -62,14 +62,11 @@ export async function createProject({
   description,
   membersId,
 }: createProjectProps) {
-  try {
-    const request = await Api.post("projects", {
-      name,
-      description,
-      membersId,
-    });
-    return request.data;
-  } catch (error) {
-    console.error("Erro ao criar o projeto", error);
-  }
+  return await Api.post("projects", {
+    name,
+    description,
+    membersId,
+  })
+    .then((res) => ({ data: { ...res.data }, status: res.status }))
+    .catch((err) => err.response.data);
 }

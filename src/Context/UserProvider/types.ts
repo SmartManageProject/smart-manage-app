@@ -1,10 +1,10 @@
 import { ListUsersResponse } from "../../types/AppTypes";
 
 export interface IUserLogged {
-  id?: string;
-  name?: string;
-  role?: string;
-  email?: string;
+  id: string;
+  name: string;
+  role: string;
+  email: string;
 }
 
 export interface IUserLoggedContext extends IUserLogged {
@@ -14,7 +14,7 @@ export interface IUserLoggedContext extends IUserLogged {
     page: number,
     limit: number,
     search?: string | null,
-  ) => Promise<ListUsersResponse>;
+  ) => Promise<ListUsersResponse | undefined>;
   createProjectRequest: (
     name: string,
     description: string,

@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
   async function authenticate(
     email: string | null | undefined,
-    password: string | null | undefined
+    password: string | null | undefined,
   ) {
     const response = await LoginResquest(email, password);
     if (response.token !== undefined) {
@@ -41,14 +41,18 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     name: string | null | undefined,
     email: string | null | undefined,
     password: string | null | undefined,
-    role: string | null | undefined
+    role: string | null | undefined,
   ) {
-    const response = await CreateUser(name, email, password, role).then(
-      ({ response }) => response.data
-    );
+    const response = await CreateUser(name, email, password, role);
+
     if (response.status === 400) {
       throw new Error(response.message);
     }
+
+    setUser(response.data);
+    setUserLocalStorage(response.data);
+
+    return response.data;
   }
 
   return (

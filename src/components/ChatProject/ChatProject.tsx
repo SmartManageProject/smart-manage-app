@@ -8,9 +8,14 @@ import { IMessage } from "../../types/AppTypes";
 type chatProjectProps = {
   messages: IMessage[];
   projectId: string;
+  projectDescription: string;
 };
 
-const ChatProject = ({ messages, projectId }: chatProjectProps) => {
+const ChatProject = ({
+  messages,
+  projectId,
+  projectDescription,
+}: chatProjectProps) => {
   const user = useUserLogged();
   const [message, setMessage] = useState("");
   const userId = user.id;
@@ -26,6 +31,9 @@ const ChatProject = ({ messages, projectId }: chatProjectProps) => {
 
   return (
     <div className={styles.projectChatContainer}>
+      <div className={styles.fixed}>
+        <p>{projectDescription}</p>
+      </div>
       <div className={styles.messages}>
         {messages?.map((message) => (
           <Message

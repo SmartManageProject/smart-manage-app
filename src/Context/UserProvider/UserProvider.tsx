@@ -44,8 +44,9 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
     membersId: string[],
   ) {
     const response = await createProject({ name, description, membersId }).then(
-      ({ response }) => response.data,
+      (response) => response,
     );
+
     if (response.status === 400) {
       throw new Error(response.message);
     }
@@ -56,6 +57,7 @@ export const UserPorvider = ({ children }: IUserLoggedProvider) => {
       id: response.id,
       name: response.name,
       role: response.role,
+      email: response.email,
     };
   }
 
