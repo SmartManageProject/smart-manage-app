@@ -10,6 +10,7 @@ import { useUserLogged } from "../../Context/UserProvider/useGetUser";
 const HomePage = () => {
   const { updateUserLogged } = useUserLogged();
   const [projectId, setProjectId] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
   const [messages, setMessages] = useState<IMessage[]>([]);
 
   useEffect(() => {
@@ -40,9 +41,9 @@ const HomePage = () => {
   return (
     <div className={styles.container}>
       <Header />
-      <ProjectSideBar selectProjectChat={setProjectId} />
+      <ProjectSideBar selectProjectChat={setProjectId} selectProjectDescription={setProjectDescription}/>
       {projectId !== "" && (
-        <ChatProject messages={messages} projectId={projectId} />
+        <ChatProject messages={messages} projectId={projectId} projectDescription={projectDescription}/>
       )}
     </div>
   );

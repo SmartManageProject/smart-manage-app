@@ -6,12 +6,22 @@ type projectItemProps = {
   id: string;
   description: string;
   selectProjectChat: (id: string) => void;
+  selectProjectDescription: (description: string) => void;
 };
 
-const ProjectItem = ({ name, id, selectProjectChat }: projectItemProps) => {
+const ProjectItem = ({
+  name,
+  id,
+  description,
+  selectProjectChat,
+  selectProjectDescription,
+}: projectItemProps) => {
   return (
     <div
-      onClick={() => selectProjectChat(id)}
+      onClick={() => {
+        selectProjectChat(id);
+        selectProjectDescription(description);
+      }}
       className={styles.projectContainer}
     >
       <img src={logo} alt="imagem do projeto" />

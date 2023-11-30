@@ -2,13 +2,24 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 90vh;
+  .fixed{
+    background-color:#D0D4CE;
+    margin: 1rem 1rem;
+    border-radius: 1rem;
+    p{
+      text-align: center;
+      font-size: 1.5rem;
+      padding: 1rem 0;
+    }
+  }
   .messages {
     width: 100%;
     display: flex;
     flex-direction: column;
     content-visibility: auto;
     overflow-y: auto;
-    height: 80vh;
+
   }
   .messages::-webkit-scrollbar-track{
 	/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
