@@ -4,13 +4,13 @@
   justify-content: space-between;
   height: 90vh;
   .fixed {
+    background-color: #d0d4ce;
+    margin: 0.5rem 1rem 0 1rem;
+    border-radius: 1rem;
     p {
       text-align: center;
       font-size: 1.5rem;
-      padding: 1rem 0;
-      background-color: #d0d4ce;
-      margin: 1rem 1rem 0 1rem;
-      border-radius: 1rem;
+      padding: 0.5rem 0;
     }
   }
   .messages {
@@ -19,6 +19,7 @@
     flex-direction: column;
     content-visibility: auto;
     overflow-y: auto;
+    height: 100vh;
   }
   .messages::-webkit-scrollbar-track {
     /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
